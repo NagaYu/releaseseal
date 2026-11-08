@@ -1,0 +1,20 @@
+{
+  "info": {
+    "id": "acme/tiny-undocumented",
+    "sha": "0011223344556677889900aabbccddeeff001122",
+    "cardData": {
+      "license": "mit",
+      "pipeline_tag": "text-generation",
+      "tags": ["text-generation"]
+    }
+  },
+  "tree": [
+    {"path": "README.md", "size": 220},
+    {"path": "config.json", "size": 600},
+    {"path": "model.safetensors", "size": 2200000, "lfs": {"sha256": "1122334455667788990011223344556677889900aabbccddeeff00112233aabb", "size": 2200000}}
+  ],
+  "files": {
+    "README.md": "---\nlicense: mit\npipeline_tag: text-generation\ntags:\n  - text-generation\n---\n\n# tiny-undocumented\n\nA model with a sparse card (missing most Annex XI/XII documentation).\n",
+    "config.json": "{\"model_type\": \"llama\", \"hidden_size\": 512, \"num_hidden_layers\": 8, \"num_attention_heads\": 8, \"num_key_value_heads\": 8, \"vocab_size\": 32000, \"intermediate_size\": 1536, \"max_position_embeddings\": 2048, \"tie_word_embeddings\": false}"
+  }
+}

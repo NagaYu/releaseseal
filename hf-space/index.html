@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReleaseSeal — evidence, not certification</title>
+<style>
+  :root { --fg:#1a1a1a; --mut:#666; --bg:#fff; --line:#e3e3e3; --accent:#2b5cff; }
+  @media (prefers-color-scheme: dark){ :root{ --fg:#e8e8e8; --mut:#9a9a9a; --bg:#131313; --line:#2a2a2a; --accent:#7aa2ff; } }
+  body{ background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system,Segoe UI,Roboto,sans-serif; margin:0; }
+  main{ max-width:860px; margin:0 auto; padding:24px 16px 64px; }
+  h1{ font-size:1.7rem; margin:.2em 0; } h2{ margin-top:1.6em; border-bottom:1px solid var(--line); padding-bottom:.2em; }
+  .note{ background:color-mix(in srgb,var(--accent) 10%,transparent); border-left:3px solid var(--accent); padding:.6em .9em; border-radius:4px; }
+  table{ border-collapse:collapse; width:100%; font-size:.92rem; } th,td{ border:1px solid var(--line); padding:5px 8px; text-align:left; }
+  th{ background:color-mix(in srgb,var(--fg) 6%,transparent); } code{ font-family:ui-monospace,Menlo,monospace; font-size:.9em; }
+  .mut{ color:var(--mut); } select,button{ font:inherit; padding:4px 8px; }
+  pre{ background:color-mix(in srgb,var(--fg) 5%,transparent); padding:10px; border-radius:6px; overflow:auto; font-size:.82rem; }
+  .f-high{color:#c0392b} .f-medium{color:#b9770e} .f-low{color:#2b7a2b} .f-info{color:var(--mut)}
+</style>
+</head>
+<body><main>
+<h1>ReleaseSeal</h1>
+<p>An offline, deterministic verifier of model-release <strong>documentation</strong> against its
+artifacts. It emits a hash-chained <strong>evidence pack</strong> you can re-verify offline.</p>
+<p class="note"><strong>Evidence, not certification.</strong> ReleaseSeal reports consistency and
+completeness of documentation. It does not certify compliance or "passing". A finding is a place to
+check, not a verdict.</p>
+
+<h2>Part B — 40 popular public models (missing documentation, per item)</h2>
+<p class="mut">Pinned revisions, aligned verifier, metadata only. 40/40 audited, 0 errors.</p>
+<table><thead><tr><th>EU AI Act documentation item</th><th>models missing</th></tr></thead><tbody>
+<tr><td>Copyright policy — Art. 53(1)(c)</td><td><strong>40 / 40</strong></td></tr>
+<tr><td>Public training-content summary — Art. 53(1)(d)</td><td><strong>38 / 40</strong></td></tr>
+<tr><td>Training compute — Annex XI 2(d)</td><td>34 / 40</td></tr>
+<tr><td>Energy consumption — Annex XI 2(e)</td><td>33 / 40</td></tr>
+<tr><td>Testing/validation process — Annex XI 1(e)</td><td>30 / 40</td></tr>
+<tr><td>Distribution channels — CoP form</td><td>26 / 40</td></tr>
+<tr><td>Acceptable-use policy — Annex XII 2</td><td>21 / 40</td></tr>
+<tr><td>Downstream-integration info — Annex XII 1</td><td>19 / 40</td></tr>
+<tr><td>Evaluation results — Annex XI 2(g)</td><td>14 / 40</td></tr>
+<tr><td>Intended use — Annex XI 1(a)</td><td>13 / 40</td></tr>
+<tr><td>Input/output modality — Annex XII 3</td><td>7 / 40</td></tr>
+<tr><td>Training-data summary — Annex XI 2(c)</td><td>6 / 40</td></tr>
+</tbody></table>
+<p class="mut">Disclosure: 2 of 40 (<code>google/gemma-2-2b</code>, <code>meta-llama/Llama-3.2-1B</code>)
+are gated; their config was not fetchable, so inspection was card-metadata only. V4
+(documentation presence) is a pattern-based screening signal — read a V4 finding as a place to check.
+V1–V3 / V5–V7 are artifact checks (hashes, config, lineage, loadability).</p>
+
+<h2>Representative evidence pack</h2>
+<p>Select a pack to view its findings and chain tip. Each is hash-chained and re-verifiable offline
+with <code>releaseseal verify-pack</code>.</p>
+<p><select id="sel">
+  <option value="packs/Qwen__Qwen2.5-0.5B.pack.json">Qwen/Qwen2.5-0.5B</option>
+  <option value="packs/openai-community__gpt2.pack.json">openai-community/gpt2</option>
+  <option value="packs/google__gemma-2-2b.pack.json">google/gemma-2-2b (gated)</option>
+</select></p>
+<div id="out" class="mut">Loading…</div>
+
+<h2>Gate history (honest)</h2>
+<table><thead><tr><th>gate</th><th>result</th><th>note</th></tr></thead><tbody>
+<tr><td>GATE 1 (dev synthetic)</td><td><strong>PASS</strong></td></tr>
+<tr><td>GATE 2 (sealed holdout v1/v2/v3)</td><td><strong>FAIL</strong></td><td>always on V4 clean false positives; recall V1–V7 all 1.000 on the final set</td></tr>
+</tbody></table>
+<p class="mut">Published as-is per a pre-recorded stop rule. Holdout cases are never published.</p>
+
+<p class="mut">All Rights Reserved · transfer/license-available · contact:
+<a href="https://nagayu-portfolio.nagayu.workers.dev/en">portfolio</a></p>
+
+<script>
+const sel=document.getElementById('sel'), out=document.getElementById('out');
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+async function show(url){
+  out.textContent='Loading…';
+  try{
+    const p=await (await fetch(url)).json();
+    const recs=p.records||[];
+    const hdr=recs.find(r=>r.type==='header')||{}, ref=recs.find(r=>r.type==='snapshot_ref')||{};
+    const fs=recs.filter(r=>r.type==='finding').map(r=>r.finding);
+    let h=`<p><strong>${esc((ref.source||{}).repo_id||'release')}</strong> · rev <code>${esc((ref.source||{}).revision||'?')}</code><br>`
+      +`snapshot <code>${esc((ref.snapshot_sha256||'').slice(0,24))}…</code> · chain tip <code>${esc((p.chain_tip||'').slice(0,24))}…</code> · `
+      +`rule packs ${esc(JSON.stringify(hdr.rule_packs||{}))}</p>`;
+    h+=`<p>${fs.length} finding(s):</p><ul>`;
+    for(const f of fs){
+      const ev=f.evidence||{};
+      h+=`<li><span class="f-${esc(f.severity)}">[${esc(f.severity)}]</span> <code>${esc(f.check)}/${esc(f.code)}</code>`
+        +(f.heuristic?' <em>(heuristic)</em>':'')+` — ${esc(f.message)}`
+        +(ev.field?` <span class="mut">(field <code>${esc(ev.field)}</code>)</span>`:'')+`</li>`;
+    }
+    h+=`</ul><p class="mut">Evidence, not certification: these are documentation-consistency findings, not a compliance verdict.</p>`;
+    out.innerHTML=h;
+  }catch(e){ out.textContent='Could not load pack (view this page from the hosted Static Space).'; }
+}
+sel.onchange=()=>show(sel.value); show(sel.value);
+</script>
+</main></body></html>

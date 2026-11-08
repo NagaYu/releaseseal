@@ -1,0 +1,56 @@
+{
+  "demo/child-finetune": {
+    "info": {
+      "id": "demo/child-finetune",
+      "sha": "c0ffee00c0ffee00c0ffee00c0ffee00c0ffee00",
+      "cardData": {
+        "license": "apache-2.0",
+        "pipeline_tag": "text-generation",
+        "tags": ["text-generation"],
+        "base_model": ["demo/parent-merge"],
+        "base_model_relation": "finetune"
+      }
+    },
+    "tree": [
+      {"path": "README.md", "size": 500},
+      {"path": "config.json", "size": 600},
+      {"path": "model.safetensors", "size": 2000000, "lfs": {"sha256": "aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44ee55ff66aa11bb22cc33dd44", "size": 2000000}}
+    ],
+    "files": {
+      "README.md": "---\nlicense: apache-2.0\nbase_model:\n  - demo/parent-merge\nbase_model_relation: finetune\n---\n# child-finetune\n",
+      "config.json": "{\"model_type\": \"llama\", \"hidden_size\": 512, \"num_hidden_layers\": 8, \"num_attention_heads\": 8, \"num_key_value_heads\": 8, \"vocab_size\": 32000, \"intermediate_size\": 1536, \"max_position_embeddings\": 4096, \"tie_word_embeddings\": false}"
+    }
+  },
+  "demo/parent-merge": {
+    "info": {
+      "id": "demo/parent-merge",
+      "sha": "b00b00b00b00b00b00b00b00b00b00b00b00b000",
+      "cardData": {
+        "license": "apache-2.0",
+        "base_model": ["demo/grandparent-llama"]
+      }
+    },
+    "tree": [
+      {"path": "README.md", "size": 300}
+    ],
+    "files": {
+      "README.md": "---\nlicense: apache-2.0\nbase_model:\n  - demo/grandparent-llama\n---\n# parent-merge\n"
+    }
+  },
+  "demo/grandparent-llama": {
+    "info": {
+      "id": "demo/grandparent-llama",
+      "sha": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+      "cardData": {
+        "license": "llama-3-community"
+      }
+    },
+    "tree": [
+      {"path": "README.md", "size": 300},
+      {"path": "NOTICE", "size": 120}
+    ],
+    "files": {
+      "README.md": "---\nlicense: llama-3-community\n---\n# grandparent-llama\n"
+    }
+  }
+}

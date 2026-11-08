@@ -1,0 +1,4539 @@
+{
+  "schema_version": "bench-manifest-ext/1",
+  "seed": 0,
+  "cases_sha256": "eb636f26b740577101858b389c2c9478ca7f254dac062a225329504542c9e485",
+  "composition": {
+    "V3": 16,
+    "clean": 8
+  },
+  "cases": [
+    {
+      "id": "ext-0001",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0001",
+          "revision": "rev-982c94af",
+          "path": "/bench/ext-0001"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "d9cfe5165a8d104d98948ff8c04cc4ca65dfa2f6fda06e14d7010fab0ab33037",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "4accaaf5f058c71dd29cdfbd61351a288f8f080b200d88b0b72329772c032a0b",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "c0bef5a6bd67d30bab554ae14309e9a729d470f6a354587c06160f55a73ceaef",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 921600000,
+            "sha256": "516e3294f1337e2875aa5d6ebacd1e7ef2fec837be7367fb1745e3fd793a89f3",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "bf69568539b6db63f57b83235ac348f215dc06d51650ac5fdb3913f1d02071bf",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "38ea87793e78e725b56b0b09ffd2af9ada1228085eb4e038a14914ee86c95097",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "d59f5ac58ef2da6128577bc5008f1cd4bfd7b18cd328a2de2240fe697abb9e85",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0001\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 310247424,
+            "param_count_text": "~310247424",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 128256,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 921600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "llama-3-community",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "6117918954631640c444f3525c7819be1347ad13044f24861e05d1a87e411933"
+      }
+    },
+    {
+      "id": "ext-0002",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0002",
+          "revision": "rev-c78cec5e",
+          "path": "/bench/ext-0002"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "c9c9b2b298332a1fedca3cd32b484fe07f0ecd6f3c222a4dee7d11cd17c4bce6",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "faa650366f83576155d84bfced78408eceaa2e4f60d5d792dd91752403bb9e5d",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "ab616debca65377f615bfb67368bb62f7b3cc8c7f3ec2b3a20a7a18179acd3cd",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1228800000,
+            "sha256": "0db7896def66f0a5fa9bc49839a92e63013ce878e3b91f3a5953e952bf81cae9",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "474d4b8970c774473668e3c4e370616dcb0a87b021a6dbd1973de11186cad65a",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "1894841d7f6c2fea622d0225cf893ed6bb2226c50c010aca953f79e298a1ddce",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "7298f9751a52f4374238abbad22ac09480d50c421b5796ad85c9d660fed457f6",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0002\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 133252096,
+            "param_count_text": "~133252096",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 24,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 50257,
+          "intermediate_size": 1536,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1228800000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "llama-3-community",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "1cb111bbd93b4f8de946229fda340dda71ece72e996dd48ef51be13acc764b95"
+      }
+    },
+    {
+      "id": "ext-0003",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0003",
+          "revision": "rev-44e0bc0b",
+          "path": "/bench/ext-0003"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "48e206857e8ed55bfa8b6fde0ceb9d9263a64bcb65f67d9ca7f7a2e1e449cf3a",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "4703b14cd07defec6c29c3c16c613c3824bee80058f802005ff98a8e7da9e76c",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "dece3d31f9cbfdc34a6abd2f3b1bd11d400accab1e9de0e64deb105c551f656c",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 4915200000,
+            "sha256": "3998e4a9001b0343ce67fb6cabea3352df388ec509613c9322246d4b33be726e",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "6b2be3edc0ba897231a77afd27f8654558a557fb8599ec245274ac34b06e5595",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "05e9350921537d47889c1704b30f476ced58f912f794b26ec5392bfdbfc74e3d",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "e3248f4ae3a0012a3bbf4bed5b6322d8233b525ed4bcb8adaf9472286f2c014c",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0003\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 2135949312,
+            "param_count_text": "~2135949312",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 2048,
+          "num_hidden_layers": 24,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 128256,
+          "intermediate_size": 8192,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 4915200000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "llama-3-community",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "c696ef2bff3e95713b0560be719687c5414fa14fe74f1bd04afcf3d7ebb13de4"
+      }
+    },
+    {
+      "id": "ext-0004",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0004",
+          "revision": "rev-6529e8f5",
+          "path": "/bench/ext-0004"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "91e30826fb6bbc18090587df3d753b8dc7661818d2d73e5632b2748f1a99fc69",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "ee3c41c5876cfde9220d39396567660d9b76bcce71de9c3dc0f05e876e9b4edd",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "d3a6255dbd2bc751f298df03f33de3d469ff229a2b664db6fac0ca82f4e5016e",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 614400000,
+            "sha256": "d9a4a5c67da6b92fa798ae6b4071a52ba789cf60d843ea0a1f1fb05689c5758f",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "33f7038f4b697c2cea2f0dd23e52faf57afb028b5001c9ea13e9ffa7604c7ea0",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "49daa8893950114bf3cca03fd0d77f0307751c0c93d0178a2e20004fedab3e45",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "539b09cc379968da18451aebc2ac0905dc5c98f2d8ab29f9785bcf2f6afd2272",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0004\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 83886080,
+            "param_count_text": "~83886080",
+            "context_length": 8192,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 32768,
+          "intermediate_size": 2048,
+          "max_position_embeddings": 8192,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 8192,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 614400000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "llama-3-community",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "2bd365430b105c03cc4bcb47a9080672fb3cb01e8b4c7586448ab1477745961b"
+      }
+    },
+    {
+      "id": "ext-0005",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0005",
+          "revision": "rev-4a26d0b5",
+          "path": "/bench/ext-0005"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "9d16b2e0f294ab745a7b2d829cacb122cd5e6148093b217d383e30d53f4a85a8",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "397312a646c1ccce4b8972205801bbdb5eaaf806e659f21e092eaf5d377931e7",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "d76f4e8c998e45124e5e043cc47d0ec5c11ba17fe910a1dbbbf51ae11ba8e29b",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 409600000,
+            "sha256": "91ca93c365329b423691496d2f9a4667c01a6a9fd18717269536ecef2b44997d",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "cea3ba3811b9bfac093c3c78db8f2dbdb05b74074f8919611793740a101457f9",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "08506f070b5515bd3d4863917c80c1a8ab0d011e7109e30de9a1101a8290183e",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "19ab3216af53f4f2bde8c7cf4738e22645aa1ef46afd6cde35401aebbc326ffc",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0005\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 162791424,
+            "param_count_text": "~162791424",
+            "context_length": 8192,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 8,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 4,
+          "vocab_size": 128256,
+          "intermediate_size": 2048,
+          "max_position_embeddings": 8192,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 8192,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 409600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "weird-custom-1.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "f68c230d2cc31e416d6d48dca1d24daa32702d4aae8130a6476035efe8e25cce"
+      }
+    },
+    {
+      "id": "ext-0006",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0006",
+          "revision": "rev-60fd6f73",
+          "path": "/bench/ext-0006"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "f46a3bf2d962b6e45a0517d8a258cebdd439c05b02165110a321ecec635b417f",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "026a492c296a09d3f0058b1df55456918efbf174c4873ff7398ded9c39462e02",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "5e584b7e0e644656377c47ac14b4faf079236bb6e9a1e11aa9858845074de71b",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1228800000,
+            "sha256": "f41db6a927b8dd123168c89fc48d2f30ae684cf35c6d0b83531048de389384e2",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "1b979be614771dba3afa1ab275f9906c36ca70c95af81acdc9dfc79385c8269c",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "10f194787713513d59fa58fbd3728eb4c6e78c6ec5ab072c6bc6a70cfd3385b0",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "25d362a244cda466fb978f01607a9680d8e9a53b4d39ebe99aef7d99e967199e",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0006\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 127926272,
+            "param_count_text": "~127926272",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 24,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 4,
+          "vocab_size": 32768,
+          "intermediate_size": 2048,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1228800000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "weird-custom-1.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "18952def5663e5c5638894413f3047d67e770e0cdfbb9cac8e886072b4d2578b"
+      }
+    },
+    {
+      "id": "ext-0007",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0007",
+          "revision": "rev-f81d23ae",
+          "path": "/bench/ext-0007"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "2377e23dfdd3c558501026fe31212175565eba282cb4e4547ca147be07c6d9d6",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "9a90483408033cca29e8343e9f22155c75381324bf0beb5282d4f3b814079b85",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "667ab98aed79602cc49495e514d5b75864819af0b7d3267a408e9e91390a3215",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 921600000,
+            "sha256": "78805e61204cc747a1455a3c453dcaedf5427105c7c007907e1c6325d86f4b4d",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "2a4921ca478ff4b339369a9628e5091cf028843ef76948fe010a503c5fe975d3",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "8ffc7f2e26d660909f149ca0ab391740f837c6f713daa964349adb484c132361",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "46bbaa567a26f394da82cc7fd36e9b757e5a5c6332d745a85f4a8694e75b31c9",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0007\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 155320320,
+            "param_count_text": "~155320320",
+            "context_length": 8192,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 8,
+          "vocab_size": 32000,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 8192,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 8192,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 921600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "weird-custom-1.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "e55a96222de4f69b797b43078be1ef2678e48a32450ccf4668dda45074eb1580"
+      }
+    },
+    {
+      "id": "ext-0008",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0008",
+          "revision": "rev-29082f21",
+          "path": "/bench/ext-0008"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "f177fd70832d431b4bcefe6131c1edf607d063bee547f558b6ff9368ce5d3c85",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "0907c1c8492fc5359957e7775f5cdc05f30631bd0986199cce117a00b502a4fa",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "dbce1fe43279a4e2b4a15e213817c2de40e2d9204c4d7bcd151fee324379ba55",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 2457600000,
+            "sha256": "fbd5bfb46a9d9a77567cd9c47607b79d62063bdfd1ae39911830ec286a24d793",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "270be9519fa83f57448408dfd7cbe4779b05ee55e8ad03b4506035bdc4a604aa",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "1b4f5622ff329456c9f7ccc3126d0c9413b5b12189b8ae5d4a2310e94afe5602",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "e3c4404e23c93a6d12fea58a1478f8cf9fe1c4b15c7cfd68fcc5bc362512afce",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0008\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 809832448,
+            "param_count_text": "~809832448",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 2048,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 4,
+          "vocab_size": 50257,
+          "intermediate_size": 6144,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 2457600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "weird-custom-1.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "f8e25abbe4546628833fbb6d5a246f11fde76c45cf2067fa3f26feeff15761e2"
+      }
+    },
+    {
+      "id": "ext-0009",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0009",
+          "revision": "rev-a59878b0",
+          "path": "/bench/ext-0009"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "ac9b356b1867c3161e5f4aa67047cc936391cc7c9c57640831b6b545e413fde1",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "3962548a1600f7ac149f1a6122623662263e7df0b7e1bc273d576143d68cc388",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "a471872db438da94ff7cd58b885f49fb4f63f5773f48fe3e0d0105c41eb6ae13",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1228800000,
+            "sha256": "cba7a111efd5d924a14e13ea58245cde0f9c0a7f269d3515529aec5fbb0194de",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "513d5b4ba893609ec510e88f31ef3e7346c669c64b29ba38aae6a50242c659ee",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "e0b614ccaf878ab2aaba7a0e0812667d15534b8e22f530783e7a6ee21f48fe00",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "12a0fd7d841a8215684591d4e783be2eb4ea80c5ddaa74bdb4025afbdd34c9bf",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0009\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 133431296,
+            "param_count_text": "~133431296",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 24,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 8,
+          "vocab_size": 32000,
+          "intermediate_size": 2048,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1228800000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "ce258b6e85064dd07b809fa1afda83fefc00139fcba147b75a316db06db22d44"
+      }
+    },
+    {
+      "id": "ext-0010",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0010",
+          "revision": "rev-97c14e4d",
+          "path": "/bench/ext-0010"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "5adecb1cd009c4d2d74a80e550528c80c54f21d6dc28f1288b95c0cba2250d93",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "7426bd545e88c41c9f40fa5857cdabd281073e9fbc0ed1b786f0d8ade4fa565c",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "2364cd3286ea908bd2bf9a38da400d26aab498d5c1c1c47ea13f0717cf10fa6a",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1228800000,
+            "sha256": "7dcb3194cca25b7317754a80f4a13081d83f8d5fff444463dc8aec0e23928031",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "13dd4769c10566e54a95f87ffac07a8b3fb9dbb57347cb3ea386eaf6c4b5f1b3",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "a5e3992e5b6b815816763938c784b3274282a74eab3b6236deba6707ccbaea21",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "c91f88b714a0d7d80eb3f4826ef22e19622dc44a5407ec5409d5f56fa3a55351",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0010\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 347996160,
+            "param_count_text": "~347996160",
+            "context_length": 2048,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 16,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 8,
+          "vocab_size": 128256,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 2048,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 2048,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1228800000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "6f194c6960a2dc6ffc386d45016a0ec66a94c0890f1e52fdd518052c1e0a632b"
+      }
+    },
+    {
+      "id": "ext-0011",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0011",
+          "revision": "rev-4149d718",
+          "path": "/bench/ext-0011"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "274145efb76488c9fd18862bc148a6b75ab2f66d7825bf3dc186f4bf0737d038",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "2ee276c2f2411817a521b8773f2ede4ca509c0b2ac870c60051ea10773140bcb",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "a61cf49351a90dde2700d20034ff1eaa4b803d9550ff5bc911bf0a704ca80a51",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 2457600000,
+            "sha256": "8a99c02ab980f905514b1df36501e5e1406cd1c51d4af4332d1ad0869c406d92",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "5e72cb93d0dde2977b7282a6c2729c8e08c36fc5d07f1f7cd60774b3daaa0b02",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "9bd1108c92d06a6d042ecc86a9b806d52427e48c511fdb7b8ae0c0dbd15ee817",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "bc5b2c5ec821bacbfb1337777a90aa6d1da333cfc2e68e45bdae6392184552dd",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0011\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 468189184,
+            "param_count_text": "~468189184",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 1024,
+          "num_hidden_layers": 24,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 8,
+          "vocab_size": 32000,
+          "intermediate_size": 4096,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 2457600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "a7f224c513f1ced1b716b725cd27b124ee62be02cc790a59c00e4d65a1c7086a"
+      }
+    },
+    {
+      "id": "ext-0012",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "g1"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0012",
+          "revision": "rev-08e2aa3b",
+          "path": "/bench/ext-0012"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "3f4c1cbaa4d17a0319fc1b05921156c92552856464c1f888bd20e2b450822095",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "48ba1a317aaa877e801c207cf9362c3d2091f95fae7a41a3fcbbbfebedb4a95e",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "503a30cdbe086dae268906dd3427dc07db63efd7904189545c5a5e45d212c5d3",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1638400000,
+            "sha256": "59511e14fed33393541be58657cbdcd97ec6246737cc31c12e162bff0822ca9a",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "16d6f5451cf938ab901c1dbf8b95d59fdb0c4ad038974c8a9bb7ca8ebe6fa8cf",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "4b1d536d9de6a0255b4a518a6a33ad9573d0156b09797d09d946003bb4add658",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "d9b5d7da6eeea35572226e9413a39f32f56624a976a814cbcac382670d876ccf",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0012\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 567279616,
+            "param_count_text": "~567279616",
+            "context_length": 8192,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 2048,
+          "num_hidden_layers": 8,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 32000,
+          "intermediate_size": 6144,
+          "max_position_embeddings": 8192,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 8192,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1638400000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "888bd57417ac1a793555abaf2f6b80d38cb63c5290c05c962be1b449cbc905d8"
+      }
+    },
+    {
+      "id": "ext-0013",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "b"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0013",
+          "revision": "rev-13a47cc5",
+          "path": "/bench/ext-0013"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "76ad72fe0281ff8e2b53740c9bd05977f98ca2d76530c2b5c783855b27aa1057",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "847fed0212e28db85195c8631789a4fac7150b7c94bd0dd83ffcfb674db2a489",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "17162d666e8b01730223ada0770e8a98e38fa8fb669755bd1e49c23a4c719ea4",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 819200000,
+            "sha256": "b69503664352cb71dc743244efe95ed8ffc7fdeaf090a3f84713a865791781cf",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "f7ffefaed0681b948cb72912ff97b026376463a90a6316a4e51461a093f47b3a",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "5c2ca671807223538cc9202b32752a067c95267568106e3f23efbd4c4205cbd2",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "13ce1d8e074c3320ee424bd32529c73b743a96c93b763e617d98070c35f86138",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0013\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 396886016,
+            "param_count_text": "~396886016",
+            "context_length": 8192,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 1024,
+          "num_hidden_layers": 8,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 128256,
+          "intermediate_size": 4096,
+          "max_position_embeddings": 8192,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 8192,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 819200000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "a": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "b": {
+            "license": "cc-by-nc-4.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "a82eafb6756b107d568ccf7c5756d0da1696de06aa6fcf2930b0a8a5ef2dc6f1"
+      }
+    },
+    {
+      "id": "ext-0014",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "b"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0014",
+          "revision": "rev-29f97b81",
+          "path": "/bench/ext-0014"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "0303e18d45d83de0a2e4c9904c3e972796817bb362fc40fa9903810f4611ec6e",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "a2cd2b994e97371233ed9a7516629dac1b607fc7d44a731b5f3c6882e6184ebb",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "31eb0704b1608db5ccb802002822f2cbca1a4eca6214582ec11dc74a67a4bfcb",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1228800000,
+            "sha256": "0fe825119be7f74292943b38bb17be89828003ef2b568bc59b972be3946fddf3",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "1cf57d9ccd32e7be36641d4bd3a7e7e112ea9d4a32102a30e748654a84686b7b",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "a7560aaa1910c8bd52f7a3e7d335a33e6688e651cd3eb894a2b2c13890fc6c21",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "2708c54f1d574012edad1d5f45d0bbb24e33a6add2dea5665dba5279c9c10627",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0014\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 163577856,
+            "param_count_text": "~163577856",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 16,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 8,
+          "vocab_size": 32768,
+          "intermediate_size": 2304,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1228800000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "a": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "b": {
+            "license": "cc-by-nc-4.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "6c2b8e15fb0c44064ce41d1aacb59fa10054103afa0cee454cf211a74872f72e"
+      }
+    },
+    {
+      "id": "ext-0015",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "b"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0015",
+          "revision": "rev-dbd2f861",
+          "path": "/bench/ext-0015"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "d69608375d62c8593becad87207d82d39f1aec121eb8a0cce2d017951c031fde",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "fd239ee86cc5f71ed5a57434db1cc82336795bcfc84ce4e86b4381682c15171c",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "74140be61ba3aacfd0371e745ae272628579462c191650a7f09a3c9e91557a63",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 819200000,
+            "sha256": "143f86ea36416fad53fb42a9756ede129f08c749611d2873fb6867c2d47b5933",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "3e56cc4ced7a12f2bffd2e49b2aa73782cd7c8ded3ef35a069e3a22f94eea47b",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "4a8e2b59dab7f0fe4281d735eee563f75baf5fdb1810776b1b999a5833771a0e",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "7b97f96d0acf3b86a1841c42b483f4ca436be169e2ba131dc44fadb20ea4c9bf",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0015\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 105989120,
+            "param_count_text": "~105989120",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 16,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 50257,
+          "intermediate_size": 1536,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 819200000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "a": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "b": {
+            "license": "cc-by-nc-4.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "6f9b699633d29b7ab773ced9e5b934a555d377aef70f6682d484c5e804bb953f"
+      }
+    },
+    {
+      "id": "ext-0016",
+      "kind": "V3",
+      "expected": [
+        "V3"
+      ],
+      "lineage_truth": [
+        "b"
+      ],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0016",
+          "revision": "rev-ff0f48fd",
+          "path": "/bench/ext-0016"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "f3768e72a0fb5288363720d04de1eeb20da1f2ebf1aec3669d646bbf9dbf266d",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "178433ab1b146604ea2913410b9bccd7ac616b83e68d251ce4de4ffbbfda6ae7",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "ce170db5d01f859ef62d1a13b4ba90f2173e45be550f4da993bb72c0ef5ffd3f",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 921600000,
+            "sha256": "27260ca412d2c186a133d9f292457329ddb09278f0c2b5eb5926f378cfc72702",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "4c7cc6278cf3e2a6801f213bb9fd00e27fab3902659f252ab5e041489add69e1",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "3ac03d762a86dc2b3321163b6d0dd54034bc99ab2ffacdee6242957c7f6774ce",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "450dcb47021b45a3ae484d573e43ed78c22ccb49b6e29b84769b03c3163db5cd",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0016\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 289013760,
+            "param_count_text": "~289013760",
+            "context_length": 2048,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "a",
+              "b"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 8,
+          "vocab_size": 128256,
+          "intermediate_size": 2304,
+          "max_position_embeddings": 2048,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 2048,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 921600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "a": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "b": {
+            "license": "cc-by-nc-4.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "99ad9af2ee6e7dcb4611cf5a3e52d0bb528ae830765814b918adc67a24bb691c"
+      }
+    },
+    {
+      "id": "ext-0017",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0017",
+          "revision": "rev-c82a2252",
+          "path": "/bench/ext-0017"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "c126073fb5ac5d4e5c5740e299b28caca44c7544e229970a499ad4a1a81cfd42",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "e9e95c8443f8a837d9873beca9dd4c836133aeb91c8d93e82ec4268489de1237",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "f5662a86e009edebf8237e5212a206120647ba44b25afb6c4a022d5fff1a7d51",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 921600000,
+            "sha256": "5f27df7f1a09950957be1bde98958cc20bb15fd6dc6553035d4a28889f09a58a",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "43e1247beca9f75b7f9c2da907563d6539fb41858c1ab22467078bec2fe1e63f",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "e036d71c76769a3a187e8cbf2380d95fdda514e90a407972b5acdadde70ed6da",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "6b11011399eac39f0309c9557ccda6087624e971bd86a91c8f9bc9f83808bcec",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0017\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 310247424,
+            "param_count_text": "~310247424",
+            "context_length": 8192,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 128256,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 8192,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 8192,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 921600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "100840a14d442e72188bf6884c70eacd5b6afc58c6f683847967978b43fd35fb"
+      }
+    },
+    {
+      "id": "ext-0018",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0018",
+          "revision": "rev-9e94d31d",
+          "path": "/bench/ext-0018"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "9929e01cdb6e6887187e5ec3aec44c7dc95b855337df8d34e993a25349e203f3",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "63cc8e1d4b744e00926a3e2d58a14fafce9f9c23cc81522724c9fb41c7f89587",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "5fd6c639f4ad2cca121e7251fdbb9889304736bbb0432a71ce8db15cb14bfdeb",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1638400000,
+            "sha256": "3b4db936a9f2888d4596e38121e07ce4a49d0349e01ea69c58deb704809828af",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "7a61108ab958b9e449dc33d7e91bee641d1409aafd17ba60b5c726ccaf89b5c0",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "5bcc9bf5ee04254b4ccca9ea979b99f4c75d7387a586f7a3af00a4db7643ba8a",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "299c1c57729d9a37df1dce100fc8ec78a3ea31a0b36176bae9a60fc045cd768d",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0018\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 266862592,
+            "param_count_text": "~266862592",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 1024,
+          "num_hidden_layers": 16,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 8,
+          "vocab_size": 32000,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1638400000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "066c667fe706504478df0d7e68640fd835a20f07c72795c38fef07273a8e55d8"
+      }
+    },
+    {
+      "id": "ext-0019",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0019",
+          "revision": "rev-c09d0af7",
+          "path": "/bench/ext-0019"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "fbf8fe21683faec166c3b6b47efbed3b57859c653b0fa1359cbbb9d0babc09a1",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "7aec9c3bd1f7af8bed9fba8eb75bbd83378c5485bc7e66b8125674d3de22a301",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "9dcebc74ae850cebf735115678d2e7102cb12980250454b65522562c91a933bf",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1228800000,
+            "sha256": "dcdf5bfd0fb0599e7ae557eb63844b3cbca970134f019b84d35b7c0f67483968",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "2ef5b4a3aed56a113f4f64e221c8430ba89ac3a421b59da858a8eb1e1791b1d0",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "2f6c3ff04e730d706916dd698b38662c77a4f60589c2021da2dcf073e5d7cf8c",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "c5db5906ac4685eface29a555f7e8e90fa3464404cabd0551d0bb1dc818fa1e6",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0019\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 228189696,
+            "param_count_text": "~228189696",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 16,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 16,
+          "vocab_size": 50257,
+          "intermediate_size": 3072,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 1228800000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "99d5a57fbc116b63112a77d93a1bc77091d311147fd184fc044e18719fbff05f"
+      }
+    },
+    {
+      "id": "ext-0020",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0020",
+          "revision": "rev-ce654141",
+          "path": "/bench/ext-0020"
+        },
+        "files": [
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "51ed5d6d53a6b5302dba2cbf171bb7b866604e4779b60155838d0e351ca0ec52",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "3eee8998847cdc02a12d180770cadcb40cd5b45952038957dd2401bdba1090a3",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "5041dda191c9ee8a08536c9d89f2bff3af0242f73a90b2fb31fbfcbd1f8e6fe4",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 819200000,
+            "sha256": "7308cf12d6ad12be7def37cd3f950e7b658462411e3f8de301c3211670701ada",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "41142205e5a21d53215ef52aca7d06ed4ad05bc2a1cd7ca0022fa91605924cac",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "8f8262ee564b0ab586a8bfaff1c86560106b48e7debbb210eaffd48fcdbac4d7",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "59f35680ed0c65840019072dc00c666a35d621d0bc9170f343099fbd9447edd7",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "apache-2.0",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0020\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 118572032,
+            "param_count_text": "~118572032",
+            "context_length": 2048,
+            "architecture": null,
+            "license": "apache-2.0",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 16,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 8,
+          "vocab_size": 50257,
+          "intermediate_size": 2048,
+          "max_position_embeddings": 2048,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 2048,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 819200000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "apache-2.0",
+            "notice_present_in_ancestor": false,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "afdedfb54447370a97d10496faa0f29defc0b9f5a8cb66d4b9823d46dfb940d3"
+      }
+    },
+    {
+      "id": "ext-0021",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0021",
+          "revision": "rev-d4d9a79b",
+          "path": "/bench/ext-0021"
+        },
+        "files": [
+          {
+            "path": "NOTICE",
+            "size": 256,
+            "sha256": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "a9ce3d4dc1aa9f8ea2acdc5c493ef145703a28b6150f1510f2f03f73782e8a96",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "a6ec128196f53014384e6b5b7d28f98f4cf6e83a1148b48ad336dd8cc15c3696",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "4850780fe5fa5b36d06a1bdbb4158afa360b8d6535464a1d5807a22736c79cbc",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 819200000,
+            "sha256": "ed999f9e6c7346a282cba3052b315ccd7872adbe617f3ed2d20d7688ae118424",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "044358957d2f77237a7e7ab7128565c45f2751ca502f65b969388cf0a6839dcd",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "49c2b9710c91ef54cceb3925987f76f10a5f33466cc384b540431d216f49a7de",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "5af420216831b0b8b139bba831755ee010b30b328fb6ed1259bdbb14654fde45",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0021\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 83099648,
+            "param_count_text": "~83099648",
+            "context_length": 2048,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 16,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 4,
+          "vocab_size": 32000,
+          "intermediate_size": 1536,
+          "max_position_embeddings": 2048,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 2048,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 819200000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "203e09d46a0d62898c989584524b0b2dd9b8acfea3f24898cef7e37f03d10e3e"
+      }
+    },
+    {
+      "id": "ext-0022",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0022",
+          "revision": "rev-a4bc3125",
+          "path": "/bench/ext-0022"
+        },
+        "files": [
+          {
+            "path": "NOTICE",
+            "size": 256,
+            "sha256": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "6734e7a5ef1e0ee485240f113c92fdf04d00d0cc14f9f0340545abf3947e014f",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "33a8a4cd092e105e06d1a270943143470cf20f5c5299179ebc06b0ea0305d121",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "a8b81a967eac67699b6910518ac5faddbda009b8c293f618a67e1aa937c2853d",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 921600000,
+            "sha256": "82a6f40e69c25a63e796c1183acf72d2372f734c26e693f2ab3c9d075eba9f21",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "bebd89337caec95db9ce5a5147d963e0a1f5878837df39adf4665be2c6fd98f0",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "dd64e535cb4820ae94f917c71b5bc3ec8a5b313e453efac09a9fc1e06547a4fa",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "6e077a840bcaa791486f9689b0596c84f130fb62cfdf0e6a522deffc1ab73606",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0022\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 281935872,
+            "param_count_text": "~281935872",
+            "context_length": 2048,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 768,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 4,
+          "vocab_size": 128256,
+          "intermediate_size": 2304,
+          "max_position_embeddings": 2048,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 2048,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 921600000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "1fcde7ee762f5d04152aa065999bd939d48f988301451b58c6b9b20829d5c1d1"
+      }
+    },
+    {
+      "id": "ext-0023",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0023",
+          "revision": "rev-c18fe012",
+          "path": "/bench/ext-0023"
+        },
+        "files": [
+          {
+            "path": "NOTICE",
+            "size": 256,
+            "sha256": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "0c09edd38351315f784c6f62f4383bc1bf218e5560a47162d668f9b8460b4b88",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "6ceb0960ac74369be8be415e87006440c275933b42ed0629ed4f52ebc417c89d",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "f2f272ddb387065739be2368d8ef18a2235fb8cbb7d1e99b5977d95ea28f0bad",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 614400000,
+            "sha256": "d7ba47c7f4c8d764568b10a6a21714f78e1c452dc38cd69338e800e23877e996",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "ad842a2e0c2d5be95899ce0cd1678b1597c43ceea0ad7ae0ad7bd4950c324f62",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "1695230c9c8fad2301bef4499bb37547308fcf97d74b33c3bd851d3f35e594a5",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "93b4114faa4478e2962d2e51c92042e4c35677aa5d0cea58636337392aa392e0",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0023\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 169082880,
+            "param_count_text": "~169082880",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 16,
+          "num_key_value_heads": 8,
+          "vocab_size": 128256,
+          "intermediate_size": 1536,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 614400000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "4c92632acc23b1a539e0138f540f48f69ea002c62946409a86daad9086cea3ce"
+      }
+    },
+    {
+      "id": "ext-0024",
+      "kind": "clean",
+      "expected": [],
+      "lineage_truth": [],
+      "snapshot": {
+        "schema_version": "snapshot/1",
+        "captured_at": "2026-11-08",
+        "source": {
+          "adapter": "local",
+          "repo_id": "bench/ext-0024",
+          "revision": "rev-c60f6bef",
+          "path": "/bench/ext-0024"
+        },
+        "files": [
+          {
+            "path": "NOTICE",
+            "size": 256,
+            "sha256": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "README.md",
+            "size": 4096,
+            "sha256": "1952bb3f76ed00be485e2a0d7d1a0daa7a00c13b363b7cbc0754e4b8a6f4bfcc",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "config.json",
+            "size": 1024,
+            "sha256": "b8b26b05fa8612d32ad9d5c180de5f400d4923857f2fa0eed3d437084a7b5513",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "generation_config.json",
+            "size": 256,
+            "sha256": "1592b16b7b60739bf17ff0c4af08b367997258e83b777b84f2a25c50b082d247",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors",
+            "size": 614400000,
+            "sha256": "4c2b20922a6b395846f2234990aa9787b5bae1820fe440dcb8a09fc80611008f",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 1200,
+            "sha256": "b5074b7462590afe2e8f546fded7b8312f47b7b2de59f80911c76b5bc3f6c78c",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 400000,
+            "sha256": "17621ea32c481a866a02c4398ce7a857986e8260c9238e41a79301abaee8a981",
+            "hash_source": "streamed"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 2048,
+            "sha256": "9b6cdd67e3ecde45a81d80a2270fe1bf62ced478a128510ded7c3fbcc19d4f45",
+            "hash_source": "streamed"
+          }
+        ],
+        "card": {
+          "yaml": {
+            "license": "gemma",
+            "pipeline_tag": "text-generation",
+            "library_name": "transformers",
+            "tags": [
+              "text-generation"
+            ],
+            "model-index": [
+              {
+                "name": "bench-model",
+                "results": [
+                  {
+                    "task": {
+                      "type": "text-generation",
+                      "name": "Text Generation"
+                    },
+                    "dataset": {
+                      "name": "mmlu",
+                      "type": "mmlu"
+                    },
+                    "metrics": [
+                      {
+                        "type": "accuracy",
+                        "name": "accuracy",
+                        "value": 0.72
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune"
+          },
+          "prose": "# ext-0024\n\nA compact decoder-only language model.\nThe training process followed a standard pretraining and fine-tuning recipe.\nA testing process with a documented evaluation procedure was applied.\nTraining compute was approximately 2048 accelerator-days.\nEnergy consumption and estimated carbon emissions were recorded during training.\nTraining data consisted of a documented mixture of public text corpora.\nIntended use is general-purpose English text generation.\nTechnical means for integration into AI systems are provided to downstream providers.\nAcceptable use and out-of-scope uses are described for operators.\nInput and output modality is text, encoded as UTF-8.\nThe distribution channel is the public model hub.\nA copyright policy consistent with the provider duty is published.\nA public training content summary accompanies this release.\n",
+          "claims": {
+            "param_count": 169082880,
+            "param_count_text": "~169082880",
+            "context_length": 4096,
+            "architecture": null,
+            "license": "gemma",
+            "base_model": [
+              "p1"
+            ],
+            "base_model_relation": "finetune",
+            "eval_claims": []
+          }
+        },
+        "config": {
+          "model_type": "llama",
+          "hidden_size": 512,
+          "num_hidden_layers": 12,
+          "num_attention_heads": 8,
+          "num_key_value_heads": 4,
+          "vocab_size": 128256,
+          "intermediate_size": 1536,
+          "max_position_embeddings": 4096,
+          "tie_word_embeddings": false,
+          "torch_dtype": "bfloat16"
+        },
+        "generation_config": {
+          "eos_token_id": 2,
+          "bos_token_id": 1,
+          "pad_token_id": 0,
+          "max_new_tokens": 256
+        },
+        "tokenizer_config": {
+          "model_max_length": 4096,
+          "tokenizer_class": "LlamaTokenizer"
+        },
+        "chat_template": "{{ messages }}",
+        "safetensors_index": {
+          "metadata": {
+            "total_size": 614400000
+          },
+          "weight_map": {
+            "model.embed_tokens.weight": "model.safetensors",
+            "lm_head.weight": "model.safetensors"
+          }
+        },
+        "model_index": [
+          {
+            "name": "bench-model",
+            "results": [
+              {
+                "task": {
+                  "type": "text-generation",
+                  "name": "Text Generation"
+                },
+                "dataset": {
+                  "name": "mmlu",
+                  "type": "mmlu"
+                },
+                "metrics": [
+                  {
+                    "type": "accuracy",
+                    "name": "accuracy",
+                    "value": 0.72
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result_files": {},
+        "lineage": {
+          "p1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": false,
+            "depth": 1,
+            "parent": null,
+            "resolved": true
+          },
+          "g1": {
+            "license": "gemma",
+            "notice_present_in_ancestor": true,
+            "depth": 2,
+            "parent": "p1",
+            "resolved": true
+          }
+        },
+        "snapshot_sha256": "55e4345646679f9521bfbfdabff4ce177318f14cfc1024b6f9a5d7e80401758c"
+      }
+    }
+  ]
+}

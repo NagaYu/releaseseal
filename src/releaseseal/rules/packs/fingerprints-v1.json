@@ -1,0 +1,19 @@
+{
+  "pack_id": "fingerprints-v1",
+  "version": "1.1.0",
+  "source": "V8 config-fingerprint table (DECISIONS.md D-08). Heuristic only; never a gate input (design §4.2, §9). Maps a fingerprint hash of architecture-defining config fields to a known base model id. v1.1.0 seeds known_bases from popular open base-model configs fetched via the smoke path (metadata only).",
+  "fields": [
+    "model_type",
+    "hidden_size",
+    "num_hidden_layers",
+    "num_attention_heads",
+    "num_key_value_heads",
+    "vocab_size",
+    "intermediate_size"
+  ],
+  "known_bases": {
+    "e1ae8631d68842837af1ed6bb3d9eb80701170aced1cdfa3572f8a3eb2337bc0": "EleutherAI/pythia-70m",
+    "76b4732cbfc248ceabc79b61c05ddb3604ad76fd6a91ad8c753bf5c9089efaf6": "Qwen/Qwen2-0.5B",
+    "32f9467a310eed33a881d6c397c6c6a88385cc043595f1757dc048fe7511bdce": "microsoft/phi-2"
+  }
+}

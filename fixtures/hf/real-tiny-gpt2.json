@@ -1,0 +1,68 @@
+{
+ "info": {
+  "id": "hf-internal-testing/tiny-random-gpt2",
+  "sha": "71034c5d8bde858ff824298bdedc65515b97d2b9",
+  "cardData": {}
+ },
+ "tree": [
+  {
+   "size": 791,
+   "path": ".gitattributes"
+  },
+  {
+   "size": 807,
+   "path": "config.json"
+  },
+  {
+   "size": 4883,
+   "path": "merges.txt"
+  },
+  {
+   "size": 453864,
+   "lfs": {
+    "oid": "8111d5afb0715dbf5a31396d31432cb56370ba23f6650a035ea0fc8a20b4e500",
+    "size": 453864,
+    "pointerSize": 131
+   },
+   "path": "model.safetensors"
+  },
+  {
+   "size": 3561811,
+   "lfs": {
+    "oid": "4fab47c129967e0db58e8faf8494e4bd04f2ea79bbe287ac2f90c4183c0194be",
+    "size": 3561811,
+    "pointerSize": 132
+   },
+   "path": "pytorch_model.bin"
+  },
+  {
+   "size": 90,
+   "path": "special_tokens_map.json"
+  },
+  {
+   "size": 8462256,
+   "lfs": {
+    "oid": "9ccb1b43b02b0ce538d412ed16bd7dcee4e91651741334a3cb3caecb33cc604c",
+    "size": 8462256,
+    "pointerSize": 132
+   },
+   "path": "tf_model.h5"
+  },
+  {
+   "size": 17454,
+   "path": "tokenizer.json"
+  },
+  {
+   "size": 236,
+   "path": "tokenizer_config.json"
+  },
+  {
+   "size": 10419,
+   "path": "vocab.json"
+  }
+ ],
+ "files": {
+  "config.json": "{\n  \"activation_function\": \"gelu_new\",\n  \"attention_probs_dropout_prob\": 0.1,\n  \"attn_pdrop\": 0.1,\n  \"bos_token_id\": 98,\n  \"embd_pdrop\": 0.1,\n  \"eos_token_id\": 98,\n  \"gradient_checkpointing\": false,\n  \"hidden_act\": \"gelu\",\n  \"hidden_dropout_prob\": 0.1,\n  \"initializer_range\": 0.02,\n  \"intermediate_size\": 37,\n  \"layer_norm_epsilon\": 1e-05,\n  \"model_type\": \"gpt2\",\n  \"n_ctx\": 512,\n  \"n_embd\": 32,\n  \"n_head\": 4,\n  \"n_inner\": null,\n  \"n_layer\": 5,\n  \"n_positions\": 512,\n  \"pad_token_id\": 98,\n  \"resid_pdrop\": 0.1,\n  \"scale_attn_weights\": true,\n  \"summary_activation\": null,\n  \"summary_first_dropout\": 0.1,\n  \"summary_proj_to_labels\": true,\n  \"summary_type\": \"cls_index\",\n  \"summary_use_proj\": true,\n  \"transformers_version\": \"4.11.0.dev0\",\n  \"type_vocab_size\": 16,\n  \"use_cache\": true,\n  \"vocab_size\": 1000\n}\n",
+  "tokenizer_config.json": "{\"unk_token\": \"<|endoftext|>\", \"bos_token\": \"<|endoftext|>\", \"eos_token\": \"<|endoftext|>\", \"add_prefix_space\": false, \"model_max_length\": 1024, \"special_tokens_map_file\": null, \"name_or_path\": \"gpt2\", \"tokenizer_class\": \"GPT2Tokenizer\"}"
+ }
+}

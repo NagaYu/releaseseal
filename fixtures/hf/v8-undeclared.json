@@ -1,0 +1,27 @@
+{
+ "info": {
+  "id": "demo/undeclared-pythia-clone",
+  "sha": "1234567890abcdef1234567890abcdef12345678",
+  "cardData": {
+   "license": "apache-2.0",
+   "pipeline_tag": "text-generation",
+   "tags": [
+    "text-generation"
+   ]
+  }
+ },
+ "tree": [
+  {
+   "path": "README.md",
+   "size": 200
+  },
+  {
+   "path": "config.json",
+   "size": 516
+  }
+ ],
+ "files": {
+  "README.md": "---\nlicense: apache-2.0\n---\n# undeclared clone\n",
+  "config.json": "{\"architectures\": [\"GPTNeoXForCausalLM\"], \"bos_token_id\": 0, \"eos_token_id\": 0, \"hidden_act\": \"gelu\", \"hidden_size\": 512, \"initializer_range\": 0.02, \"intermediate_size\": 2048, \"layer_norm_eps\": 1e-05, \"max_position_embeddings\": 2048, \"model_type\": \"gpt_neox\", \"num_attention_heads\": 8, \"num_hidden_layers\": 6, \"rotary_emb_base\": 10000, \"rotary_pct\": 0.25, \"tie_word_embeddings\": false, \"torch_dtype\": \"float16\", \"transformers_version\": \"4.24.0\", \"use_cache\": true, \"use_parallel_residual\": true, \"vocab_size\": 50304}"
+ }
+}

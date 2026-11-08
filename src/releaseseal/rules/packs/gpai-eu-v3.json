@@ -1,0 +1,699 @@
+{
+  "pack_id": "gpai-eu-v3",
+  "version": "3.0.0",
+  "source": "EU AI Act Reg. (EU) 2024/1689 Annex XI & Annex XII, and the GPAI Code of Practice Model Documentation Form. The 16 item IDs here are the SINGLE SOURCE OF TRUTH for the documentation set (DECISIONS.md D-25); the authoring item file docs/authoring-item-set.md is generated from them. v3.0.0 replaces fixed-phrase matching with order-independent content-word co-occurrence within a sentence window, Porter-stemmed (D-24). NOT a compliance certification.",
+  "profiles": [
+    "annex_xi",
+    "annex_xii",
+    "cop_form"
+  ],
+  "items": [
+    {
+      "id": "xi.architecture",
+      "profile": "annex_xi",
+      "label": "Model architecture description",
+      "source": "Annex XI, 1(c)",
+      "severity": "medium",
+      "satisfied_if": [
+        "config_present"
+      ],
+      "patterns": [
+        [
+          "model",
+          "architecture"
+        ],
+        [
+          "transformer",
+          "architecture"
+        ],
+        [
+          "decoder",
+          "only"
+        ],
+        [
+          "neural",
+          "network",
+          "architecture"
+        ]
+      ]
+    },
+    {
+      "id": "xi.training_process",
+      "profile": "annex_xi",
+      "label": "Training process / methodology",
+      "source": "Annex XI, 1(d)",
+      "severity": "medium",
+      "patterns": [
+        [
+          "training",
+          "process"
+        ],
+        [
+          "training",
+          "procedure"
+        ],
+        [
+          "pretrain"
+        ],
+        [
+          "fine",
+          "tune"
+        ],
+        [
+          "supervised",
+          "fine"
+        ],
+        [
+          "instruction",
+          "tune"
+        ],
+        [
+          "training",
+          "recipe"
+        ],
+        [
+          "train",
+          "adamw"
+        ],
+        [
+          "train",
+          "cosine"
+        ],
+        [
+          "train",
+          "decay"
+        ],
+        [
+          "train",
+          "optimizer"
+        ],
+        [
+          "train",
+          "objective"
+        ],
+        [
+          "train",
+          "end"
+        ],
+        [
+          "train",
+          "step"
+        ],
+        [
+          "next",
+          "token",
+          "pretrain"
+        ]
+      ]
+    },
+    {
+      "id": "xi.testing_process",
+      "profile": "annex_xi",
+      "label": "Testing process description",
+      "source": "Annex XI, 1(e)",
+      "severity": "medium",
+      "patterns": [
+        [
+          "testing",
+          "process"
+        ],
+        [
+          "evaluation",
+          "procedure"
+        ],
+        [
+          "evaluation",
+          "methodology"
+        ],
+        [
+          "validate",
+          "test"
+        ],
+        [
+          "validate",
+          "held",
+          "out"
+        ],
+        [
+          "held",
+          "out",
+          "test"
+        ],
+        [
+          "held",
+          "out",
+          "set"
+        ],
+        [
+          "validation",
+          "split"
+        ],
+        [
+          "test",
+          "split"
+        ],
+        [
+          "evaluate",
+          "benchmark"
+        ],
+        [
+          "reserved",
+          "validation"
+        ],
+        [
+          "evaluation",
+          "protocol"
+        ]
+      ]
+    },
+    {
+      "id": "xi.evaluation_results",
+      "profile": "annex_xi",
+      "label": "Evaluation results",
+      "source": "Annex XI, 2(g)",
+      "severity": "medium",
+      "satisfied_if": [
+        "model_index_present"
+      ],
+      "patterns": [
+        [
+          "evaluation",
+          "result"
+        ],
+        [
+          "benchmark",
+          "result"
+        ],
+        [
+          "benchmark",
+          "score"
+        ],
+        [
+          "performance",
+          "measure"
+        ],
+        [
+          "result",
+          "report"
+        ]
+      ]
+    },
+    {
+      "id": "xi.compute",
+      "profile": "annex_xi",
+      "label": "Training compute used",
+      "source": "Annex XI, 2(d)",
+      "severity": "medium",
+      "patterns": [
+        [
+          "training",
+          "compute"
+        ],
+        [
+          "compute",
+          "budget"
+        ],
+        [
+          "compute",
+          "use"
+        ],
+        [
+          "gpu",
+          "hour"
+        ],
+        [
+          "accelerator",
+          "day"
+        ],
+        [
+          "flop"
+        ],
+        [
+          "petaflop"
+        ],
+        [
+          "tpu",
+          "day"
+        ],
+        [
+          "compute",
+          "cost"
+        ],
+        [
+          "hardware",
+          "training"
+        ]
+      ]
+    },
+    {
+      "id": "xi.energy",
+      "profile": "annex_xi",
+      "label": "Energy consumption",
+      "source": "Annex XI, 2(e)",
+      "severity": "medium",
+      "patterns": [
+        [
+          "energy",
+          "consumption"
+        ],
+        [
+          "energy",
+          "use"
+        ],
+        [
+          "power",
+          "consumption"
+        ],
+        [
+          "carbon",
+          "emission"
+        ],
+        [
+          "carbon",
+          "footprint"
+        ],
+        [
+          "co2"
+        ],
+        [
+          "emission",
+          "training"
+        ]
+      ]
+    },
+    {
+      "id": "xi.data_summary",
+      "profile": "annex_xi",
+      "label": "Training data summary",
+      "source": "Annex XI, 2(c)",
+      "severity": "medium",
+      "patterns": [
+        [
+          "training",
+          "data"
+        ],
+        [
+          "training",
+          "dataset"
+        ],
+        [
+          "training",
+          "corpus"
+        ],
+        [
+          "data",
+          "source"
+        ],
+        [
+          "data",
+          "mixture"
+        ],
+        [
+          "corpus",
+          "text"
+        ],
+        [
+          "web",
+          "text"
+        ],
+        [
+          "web",
+          "page"
+        ],
+        [
+          "web",
+          "book"
+        ],
+        [
+          "public",
+          "book"
+        ],
+        [
+          "public",
+          "text"
+        ],
+        [
+          "web",
+          "crawl"
+        ],
+        [
+          "source",
+          "code"
+        ],
+        [
+          "licensed",
+          "code"
+        ],
+        [
+          "code",
+          "doc"
+        ],
+        [
+          "filtered",
+          "blend"
+        ],
+        [
+          "dataset",
+          "composition"
+        ],
+        [
+          "source",
+          "material"
+        ],
+        [
+          "data",
+          "overview"
+        ]
+      ]
+    },
+    {
+      "id": "xi.intended_use",
+      "profile": "annex_xi",
+      "label": "Intended tasks / acceptable use",
+      "source": "Annex XI, 1(a)",
+      "severity": "medium",
+      "patterns": [
+        [
+          "intended",
+          "use"
+        ],
+        [
+          "intend"
+        ],
+        [
+          "purpose"
+        ],
+        [
+          "suited"
+        ],
+        [
+          "appropriate"
+        ],
+        [
+          "use",
+          "case"
+        ],
+        [
+          "use",
+          "generation"
+        ],
+        [
+          "designed"
+        ],
+        [
+          "primary",
+          "use"
+        ]
+      ]
+    },
+    {
+      "id": "xii.downstream_integration",
+      "profile": "annex_xii",
+      "label": "How the model can be integrated by downstream providers",
+      "source": "Annex XII, 1",
+      "severity": "medium",
+      "patterns": [
+        [
+          "integration",
+          "system"
+        ],
+        [
+          "integrate",
+          "system"
+        ],
+        [
+          "downstream",
+          "provider"
+        ],
+        [
+          "downstream",
+          "integration"
+        ],
+        [
+          "technical",
+          "integration"
+        ],
+        [
+          "integrate",
+          "model"
+        ],
+        [
+          "deploy"
+        ],
+        [
+          "inference"
+        ],
+        [
+          "load",
+          "model"
+        ],
+        [
+          "usage",
+          "example"
+        ]
+      ]
+    },
+    {
+      "id": "xii.acceptable_use",
+      "profile": "annex_xii",
+      "label": "Acceptable-use policy / limitations",
+      "source": "Annex XII, 2",
+      "severity": "medium",
+      "patterns": [
+        [
+          "acceptable",
+          "use"
+        ],
+        [
+          "out",
+          "scope"
+        ],
+        [
+          "prohibited",
+          "use"
+        ],
+        [
+          "misuse"
+        ],
+        [
+          "responsible",
+          "use"
+        ],
+        [
+          "restriction"
+        ],
+        [
+          "out",
+          "scope",
+          "use"
+        ]
+      ]
+    },
+    {
+      "id": "xii.io_modality",
+      "profile": "annex_xii",
+      "label": "Input/output modality and format",
+      "source": "Annex XII, 3",
+      "severity": "low",
+      "patterns": [
+        [
+          "input",
+          "output"
+        ],
+        [
+          "modality"
+        ],
+        [
+          "text",
+          "prompt"
+        ],
+        [
+          "text",
+          "continuation"
+        ],
+        [
+          "token",
+          "text"
+        ],
+        [
+          "text",
+          "string"
+        ],
+        [
+          "image",
+          "audio"
+        ],
+        [
+          "text",
+          "emit"
+        ],
+        [
+          "accept",
+          "text"
+        ],
+        [
+          "text",
+          "output"
+        ]
+      ]
+    },
+    {
+      "id": "xii.license",
+      "profile": "annex_xii",
+      "label": "License information for downstream providers",
+      "source": "Annex XII, 1",
+      "severity": "high",
+      "satisfied_if": [
+        "license_present"
+      ]
+    },
+    {
+      "id": "xii.parameters",
+      "profile": "annex_xii",
+      "label": "Number of parameters",
+      "source": "Annex XII, 1",
+      "severity": "low",
+      "satisfied_if": [
+        "param_present",
+        "config_present"
+      ]
+    },
+    {
+      "id": "cop.distribution",
+      "profile": "cop_form",
+      "label": "Distribution channels",
+      "source": "GPAI CoP Model Documentation Form, 1.4",
+      "severity": "low",
+      "patterns": [
+        [
+          "distribution",
+          "channel"
+        ],
+        [
+          "distribute",
+          "hub"
+        ],
+        [
+          "download",
+          "hub"
+        ],
+        [
+          "available",
+          "download"
+        ],
+        [
+          "model",
+          "hub"
+        ],
+        [
+          "model",
+          "repository"
+        ],
+        [
+          "release",
+          "page"
+        ],
+        [
+          "download",
+          "model"
+        ],
+        [
+          "obtain",
+          "model"
+        ],
+        [
+          "available",
+          "hub"
+        ]
+      ]
+    },
+    {
+      "id": "cop.copyright_policy",
+      "profile": "cop_form",
+      "label": "Copyright policy (provider duty)",
+      "source": "Art. 53(1)(c)",
+      "severity": "high",
+      "provider_doc": true,
+      "yaml_fields": [
+        "copyright_policy",
+        "copyright_policy_url",
+        "copyright_url"
+      ],
+      "patterns": [
+        [
+          "copyright",
+          "policy"
+        ],
+        [
+          "copyright",
+          "right"
+        ],
+        [
+          "rights",
+          "training",
+          "data"
+        ],
+        [
+          "licensing",
+          "training",
+          "data"
+        ],
+        [
+          "intellectual",
+          "property"
+        ],
+        [
+          "copyright",
+          "data"
+        ],
+        [
+          "copyright",
+          "licensing"
+        ]
+      ]
+    },
+    {
+      "id": "cop.training_content_summary",
+      "profile": "cop_form",
+      "label": "Public training-content summary",
+      "source": "Art. 53(1)(d)",
+      "severity": "high",
+      "provider_doc": true,
+      "yaml_fields": [
+        "training_content_summary",
+        "training_content_summary_url",
+        "training_data_summary_url"
+      ],
+      "patterns": [
+        [
+          "summary",
+          "training",
+          "content"
+        ],
+        [
+          "training",
+          "content",
+          "summary"
+        ],
+        [
+          "summary",
+          "training",
+          "data"
+        ],
+        [
+          "public",
+          "summary",
+          "training"
+        ],
+        [
+          "content",
+          "disclosure"
+        ],
+        [
+          "content",
+          "summary"
+        ]
+      ]
+    }
+  ]
+}

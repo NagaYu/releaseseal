@@ -1,0 +1,283 @@
+{
+  "pack_id": "gpai-eu-v2",
+  "version": "2.0.0",
+  "source": "EU AI Act Reg. (EU) 2024/1689 Annex XI & Annex XII, and the GPAI Code of Practice Model Documentation Form. Item presence only; cites regulatory source per item. NOT a compliance certification. v2.0.0: phrasing-robust keyword matching (normalised/depluralised) plus provider-document items (copyright policy, training-content summary) that require a substantive card phrase OR a reference/location field — a bare word no longer satisfies (DECISIONS.md D-20, D-22).",
+  "profiles": [
+    "annex_xi",
+    "annex_xii",
+    "cop_form"
+  ],
+  "items": [
+    {
+      "id": "xi.architecture",
+      "profile": "annex_xi",
+      "label": "Model architecture description",
+      "source": "Annex XI, 1(c)",
+      "severity": "medium",
+      "keywords": [
+        "model architecture",
+        "transformer architecture",
+        "network architecture",
+        "decoder-only",
+        "decoder only",
+        "architecture of the model"
+      ],
+      "satisfied_if": [
+        "config_present"
+      ]
+    },
+    {
+      "id": "xi.training_process",
+      "profile": "annex_xi",
+      "label": "Training process / methodology",
+      "source": "Annex XI, 1(d)",
+      "severity": "medium",
+      "keywords": [
+        "training process",
+        "training procedure",
+        "training methodology",
+        "how the model was trained",
+        "pretrained",
+        "pretraining",
+        "fine-tuning",
+        "fine-tuned",
+        "training recipe",
+        "training details",
+        "trained using"
+      ]
+    },
+    {
+      "id": "xi.testing_process",
+      "profile": "annex_xi",
+      "label": "Testing process description",
+      "source": "Annex XI, 1(e)",
+      "severity": "medium",
+      "keywords": [
+        "testing process",
+        "evaluation procedure",
+        "evaluation methodology",
+        "evaluated on",
+        "benchmarked on",
+        "tested on",
+        "evaluation setup",
+        "evaluation protocol",
+        "how the model was evaluated"
+      ]
+    },
+    {
+      "id": "xi.evaluation_results",
+      "profile": "annex_xi",
+      "label": "Evaluation results",
+      "source": "Annex XI, 2(g)",
+      "severity": "medium",
+      "keywords": [
+        "evaluation results",
+        "benchmark results",
+        "benchmark scores",
+        "performance on",
+        "results on"
+      ],
+      "satisfied_if": [
+        "model_index_present"
+      ]
+    },
+    {
+      "id": "xi.compute",
+      "profile": "annex_xi",
+      "label": "Training compute used",
+      "source": "Annex XI, 2(d)",
+      "severity": "medium",
+      "keywords": [
+        "training compute",
+        "compute used",
+        "compute budget",
+        "gpu hours",
+        "gpu-hours",
+        "accelerator-days",
+        "accelerator days",
+        "flops",
+        "petaflop",
+        "tpu-days",
+        "hardware used for training"
+      ]
+    },
+    {
+      "id": "xi.energy",
+      "profile": "annex_xi",
+      "label": "Energy consumption",
+      "source": "Annex XI, 2(e)",
+      "severity": "medium",
+      "keywords": [
+        "energy consumption",
+        "power consumption",
+        "carbon emissions",
+        "carbon footprint",
+        "co2",
+        "emissions",
+        "energy used"
+      ]
+    },
+    {
+      "id": "xi.data_summary",
+      "profile": "annex_xi",
+      "label": "Training data summary",
+      "source": "Annex XI, 2(c)",
+      "severity": "medium",
+      "keywords": [
+        "training data",
+        "training dataset",
+        "data sources",
+        "training corpus",
+        "corpora",
+        "data mixture",
+        "pretraining data",
+        "training set"
+      ]
+    },
+    {
+      "id": "xi.intended_use",
+      "profile": "annex_xi",
+      "label": "Intended tasks / acceptable use",
+      "source": "Annex XI, 1(a)",
+      "severity": "medium",
+      "keywords": [
+        "intended use",
+        "intended tasks",
+        "intended for",
+        "use cases",
+        "primary use",
+        "intended to be used"
+      ]
+    },
+    {
+      "id": "xii.downstream_integration",
+      "profile": "annex_xii",
+      "label": "How the model can be integrated by downstream providers",
+      "source": "Annex XII, 1",
+      "severity": "medium",
+      "keywords": [
+        "downstream",
+        "integration into ai systems",
+        "technical means for integration",
+        "how to use",
+        "usage example",
+        "deployment",
+        "inference with",
+        "integrate the model",
+        "load the model"
+      ]
+    },
+    {
+      "id": "xii.acceptable_use",
+      "profile": "annex_xii",
+      "label": "Acceptable-use policy / limitations",
+      "source": "Annex XII, 2",
+      "severity": "medium",
+      "keywords": [
+        "acceptable use",
+        "out-of-scope",
+        "out of scope",
+        "prohibited use",
+        "misuse",
+        "limitations",
+        "restrictions",
+        "responsible use"
+      ]
+    },
+    {
+      "id": "xii.io_modality",
+      "profile": "annex_xii",
+      "label": "Input/output modality and format",
+      "source": "Annex XII, 3",
+      "severity": "low",
+      "keywords": [
+        "input and output",
+        "inputs and outputs",
+        "input/output",
+        "text-to-text",
+        "accepts text",
+        "generates text",
+        "modality",
+        "text in text out"
+      ]
+    },
+    {
+      "id": "xii.license",
+      "profile": "annex_xii",
+      "label": "License information for downstream providers",
+      "source": "Annex XII, 1",
+      "severity": "high",
+      "satisfied_if": [
+        "license_present"
+      ]
+    },
+    {
+      "id": "xii.parameters",
+      "profile": "annex_xii",
+      "label": "Number of parameters",
+      "source": "Annex XII, 1",
+      "severity": "low",
+      "satisfied_if": [
+        "param_present",
+        "config_present"
+      ]
+    },
+    {
+      "id": "cop.distribution",
+      "profile": "cop_form",
+      "label": "Distribution channels",
+      "source": "GPAI CoP Model Documentation Form, 1.4",
+      "severity": "low",
+      "keywords": [
+        "distribution channel",
+        "available on",
+        "download",
+        "hosted on",
+        "released on",
+        "model hub",
+        "distributed via",
+        "available through",
+        "repository"
+      ]
+    },
+    {
+      "id": "cop.copyright_policy",
+      "profile": "cop_form",
+      "label": "Copyright policy (provider duty)",
+      "source": "Art. 53(1)(c)",
+      "severity": "high",
+      "keywords": [
+        "copyright policy",
+        "copyright and licensing policy",
+        "rights in the training data",
+        "licensing of the training data"
+      ],
+      "provider_doc": true,
+      "yaml_fields": [
+        "copyright_policy",
+        "copyright_policy_url",
+        "copyright_url"
+      ]
+    },
+    {
+      "id": "cop.training_content_summary",
+      "profile": "cop_form",
+      "label": "Public training-content summary",
+      "source": "Art. 53(1)(d)",
+      "severity": "high",
+      "keywords": [
+        "training content summary",
+        "training-content summary",
+        "public summary of training content",
+        "summary of training content",
+        "summary of the training data"
+      ],
+      "provider_doc": true,
+      "yaml_fields": [
+        "training_content_summary",
+        "training_content_summary_url",
+        "training_data_summary_url"
+      ]
+    }
+  ]
+}

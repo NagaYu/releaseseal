@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+# NOTE: `name` and the package directory `src/releaseseal` are the only two places
+# the product name "ReleaseSeal" / "releaseseal" appears structurally (D-01, D-13).
+[project]
+name = "releaseseal"
+version = "0.1.0"
+description = "Offline verifier for model-release documentation/artifact consistency (public name ReleaseSeal; was codename ModelPass, DECISIONS.md D-13)."
+requires-python = ">=3.11"
+dependencies = []  # stdlib only by design: $0 spend, no network at verify time
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+releaseseal = "releaseseal.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+releaseseal = ["rules/packs/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

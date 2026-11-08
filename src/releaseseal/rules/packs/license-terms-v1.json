@@ -1,0 +1,98 @@
+{
+  "pack_id": "license-terms-v1",
+  "version": "1.0.0",
+  "source": "ReleaseSeal license-compatibility data model (NOT legal advice; versioned data, see SPEC.md §5). Each entry states which licenses our model treats a derivative as permitted to declare, and whether attribution/NOTICE propagation is modelled.",
+  "licenses": {
+    "apache-2.0": {
+      "name": "Apache License 2.0",
+      "category": "permissive",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["apache-2.0"]
+    },
+    "mit": {
+      "name": "MIT License",
+      "category": "permissive",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["mit", "apache-2.0"]
+    },
+    "bsd-3-clause": {
+      "name": "BSD 3-Clause",
+      "category": "permissive",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["bsd-3-clause", "apache-2.0", "mit"]
+    },
+    "cc-by-4.0": {
+      "name": "Creative Commons Attribution 4.0",
+      "category": "permissive_attribution",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["cc-by-4.0", "cc-by-sa-4.0"]
+    },
+    "cc-by-sa-4.0": {
+      "name": "Creative Commons Attribution-ShareAlike 4.0",
+      "category": "copyleft",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["cc-by-sa-4.0"]
+    },
+    "cc-by-nc-4.0": {
+      "name": "Creative Commons Attribution-NonCommercial 4.0",
+      "category": "non_commercial",
+      "commercial_use": false,
+      "requires_notice": true,
+      "derivative_may_declare": ["cc-by-nc-4.0", "cc-by-nc-sa-4.0"]
+    },
+    "cc-by-nc-sa-4.0": {
+      "name": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0",
+      "category": "non_commercial",
+      "commercial_use": false,
+      "requires_notice": true,
+      "derivative_may_declare": ["cc-by-nc-sa-4.0"]
+    },
+    "llama-3-community": {
+      "name": "Llama 3 Community License",
+      "category": "community",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["llama-3-community"]
+    },
+    "llama-2-community": {
+      "name": "Llama 2 Community License",
+      "category": "community",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["llama-2-community"]
+    },
+    "gemma": {
+      "name": "Gemma Terms of Use",
+      "category": "community",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["gemma"]
+    },
+    "bigscience-openrail-m": {
+      "name": "BigScience OpenRAIL-M",
+      "category": "openrail",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["bigscience-openrail-m", "creativeml-openrail-m", "openrail"]
+    },
+    "creativeml-openrail-m": {
+      "name": "CreativeML OpenRAIL-M",
+      "category": "openrail",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["creativeml-openrail-m", "openrail"]
+    },
+    "openrail": {
+      "name": "OpenRAIL (family)",
+      "category": "openrail",
+      "commercial_use": true,
+      "requires_notice": true,
+      "derivative_may_declare": ["openrail"]
+    }
+  }
+}

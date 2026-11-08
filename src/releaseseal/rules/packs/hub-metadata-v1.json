@@ -1,0 +1,22 @@
+{
+  "pack_id": "hub-metadata-v1",
+  "version": "1.0.0",
+  "source": "Hugging Face model-card metadata conventions (front-matter field presence/format).",
+  "required": [
+    {
+      "id": "hub.license",
+      "field": "license",
+      "label": "License declared in card front matter",
+      "severity": "high"
+    }
+  ],
+  "recommended": [
+    {"id": "hub.pipeline_tag", "field": "pipeline_tag", "label": "pipeline_tag", "severity": "low"},
+    {"id": "hub.library_name", "field": "library_name", "label": "library_name", "severity": "low"},
+    {"id": "hub.tags", "field": "tags", "label": "tags", "severity": "low"},
+    {"id": "hub.base_model_relation", "field": "base_model_relation", "label": "base_model_relation when a base_model is declared", "severity": "low", "when_base_model": true}
+  ],
+  "formats": {
+    "license": "lowercase SPDX-style id or known community-license id"
+  }
+}
