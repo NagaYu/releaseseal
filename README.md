@@ -15,6 +15,10 @@ plus a human-readable report that anyone can re-verify offline.
 No servers, no paid APIs, no weight downloads (metadata + small files only), and
 deterministic: the core is a pure function `snapshot JSON → findings JSON`.
 
+**Links:** interactive demo (Static Space) —
+<https://huggingface.co/spaces/NagaYu/releaseseal-demo> · bench dataset —
+<https://huggingface.co/datasets/NagaYu/releaseseal-bench>
+
 ## 1. What it is
 
 Eight verification classes over a versioned release **snapshot**:

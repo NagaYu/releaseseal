@@ -23,6 +23,10 @@ scores are, in the project's reports).
 > This dataset supports evidence-based *screening* of model-release documentation.
 > ReleaseSeal is not a certification and does not attest compliance.
 
+**Links:** interactive demo (Static Space) —
+<https://huggingface.co/spaces/NagaYu/releaseseal-demo> · code —
+<https://github.com/NagaYu/releaseseal>
+
 ## Contents
 
 | file | cases | what it is |
