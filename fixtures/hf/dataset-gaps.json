@@ -1,0 +1,79 @@
+{
+  "info": {
+    "id": "bench/gaps-dataset",
+    "sha": "revgapsbbbb",
+    "cardData": {
+      "license": "apache-2.0",
+      "language": [
+        "en"
+      ],
+      "annotations": {
+        "pii": "none",
+        "dedup_rate": 0.0,
+        "file_inventory": [
+          {
+            "path": "train.jsonl",
+            "rows": 3
+          },
+          {
+            "path": "missing.jsonl",
+            "rows": 10
+          }
+        ],
+        "decontaminated_against": []
+      }
+    }
+  },
+  "tree": [
+    {
+      "path": "README.md",
+      "size": 400
+    },
+    {
+      "path": "train.jsonl",
+      "size": 300,
+      "lfs": {
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "size": 300
+      }
+    }
+  ],
+  "files": {
+    "README.md": "---\nlicense: apache-2.0\n---\n# Gaps dataset\n"
+  },
+  "splits": [
+    {
+      "name": "train",
+      "num_rows": 3,
+      "num_bytes": 300
+    }
+  ],
+  "rows": {
+    "train": [
+      {
+        "text": "contact the maintainer at data.owner@example.org for access to the english research corpus"
+      },
+      {
+        "text": "the collection gathers open recipes for soups stews and baked bread from many regions"
+      },
+      {
+        "text": "volunteers transcribed old community newsletters describing local gardening clubs and seasonal harvest festivals"
+      }
+    ]
+  },
+  "croissant": {
+    "license": "mit",
+    "distribution": [
+      {
+        "name": "train.jsonl",
+        "contentUrl": "train.jsonl",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "recordSet": [
+      {
+        "name": "default"
+      }
+    ]
+  }
+}

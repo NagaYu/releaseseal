@@ -1,0 +1,39 @@
+{
+  "schema_version": "snapshot/1",
+  "captured_at": "2026-11-11",
+  "source": {
+    "adapter": "local",
+    "repo_id": "acme/widget-lm",
+    "revision": "r1",
+    "path": null
+  },
+  "files": [
+    {
+      "path": "model.safetensors",
+      "size": 11,
+      "sha256": "92fd8db60f8d544c2519c0c5506c5a23ae4d2932da6508f03e9e295ac26f6d2d",
+      "hash_source": "streamed"
+    },
+    {
+      "path": "tokenizer.json",
+      "size": 5,
+      "sha256": "85c0422275e2d7e2a994f3ae0822bb19ccbc73a1dcb113115a111bb897b68777",
+      "hash_source": "streamed"
+    },
+    {
+      "path": "README.md",
+      "size": 3,
+      "sha256": "711a6108ba2ce6ca93dd47d6817f2361db10d8ab6eec89460b2dfc2c325efabe",
+      "hash_source": "streamed"
+    }
+  ],
+  "card": {
+    "yaml": {
+      "license": "apache-2.0"
+    },
+    "prose": "",
+    "claims": {
+      "license": "apache-2.0"
+    }
+  }
+}

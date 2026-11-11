@@ -1,0 +1,68 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "bom-ref": "acme/widget-lm@r1",
+      "type": "machine-learning-model",
+      "name": "acme/widget-lm",
+      "version": "r1",
+      "supplier": {
+        "name": "Acme AI"
+      },
+      "licenses": [
+        {
+          "license": {
+            "id": "apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://hf.co/acme/widget-lm"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "model.safetensors",
+      "type": "file",
+      "name": "model.safetensors",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "92fd8db60f8d544c2519c0c5506c5a23ae4d2932da6508f03e9e295ac26f6d2d"
+        }
+      ]
+    },
+    {
+      "bom-ref": "tokenizer.json",
+      "type": "file",
+      "name": "tokenizer.json",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "85c0422275e2d7e2a994f3ae0822bb19ccbc73a1dcb113115a111bb897b68777"
+        }
+      ]
+    },
+    {
+      "bom-ref": "numpy",
+      "type": "library",
+      "name": "numpy",
+      "version": "1.26.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "acme/widget-lm@r1",
+      "dependsOn": [
+        "model.safetensors",
+        "tokenizer.json"
+      ]
+    }
+  ]
+}

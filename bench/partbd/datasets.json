@@ -1,0 +1,380 @@
+{
+  "schema_version": "partbd-datasets/1",
+  "frozen_at": "2026-11-11T06:35:56+00:00",
+  "selection_rule": "HF datasets sorted by downloads desc; public & not gated & not disabled & >=1 inventoriable data file; strata: >=6 non-English/multilingual, >=4 Croissant, >=4 >1M rows, license families spread.",
+  "walk_limit": 400,
+  "count": 36,
+  "strata": {
+    "non_english": 7,
+    "exposes_croissant": 35,
+    "large_gt_1M_rows": 10,
+    "license_families": {
+      "permissive": 20,
+      "copyleft": 3,
+      "non_commercial": 1,
+      "other_or_unknown": 12
+    }
+  },
+  "datasets": [
+    {
+      "repo_id": "Salesforce/wikitext",
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "declared_license": "cc-by-sa-3.0",
+      "license_family": "copyleft",
+      "non_english": true,
+      "exposes_croissant": true,
+      "num_rows": 3708608,
+      "large": true
+    },
+    {
+      "repo_id": "openai/gsm8k",
+      "revision": "740312add88f781978c0658806c59bc2815b9866",
+      "declared_license": "mit",
+      "license_family": "permissive",
+      "non_english": true,
+      "exposes_croissant": true,
+      "num_rows": 17584,
+      "large": false
+    },
+    {
+      "repo_id": "nyu-mll/glue",
+      "revision": "bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c",
+      "declared_license": "other",
+      "license_family": "other_or_unknown",
+      "non_english": true,
+      "exposes_croissant": true,
+      "num_rows": 1485043,
+      "large": true
+    },
+    {
+      "repo_id": "allenai/ai2_arc",
+      "revision": "210d026faf9955653af8916fad021475a3f00453",
+      "declared_license": "cc-by-sa-4.0",
+      "license_family": "copyleft",
+      "non_english": true,
+      "exposes_croissant": true,
+      "num_rows": 7787,
+      "large": false
+    },
+    {
+      "repo_id": "cais/mmlu",
+      "revision": "c30699e8356da336a370243923dbaf21066bb9fe",
+      "declared_license": "mit",
+      "license_family": "permissive",
+      "non_english": true,
+      "exposes_croissant": true,
+      "num_rows": 231400,
+      "large": false
+    },
+    {
+      "repo_id": "uoft-cs/cifar10",
+      "revision": "0b2714987fa478483af9968de7c934580d0bb9a2",
+      "declared_license": "unknown",
+      "license_family": "other_or_unknown",
+      "non_english": true,
+      "exposes_croissant": true,
+      "num_rows": 60000,
+      "large": false
+    },
+    {
+      "repo_id": "hallucinations-leaderboard/results",
+      "revision": "30f759225f89edcc18cb403b93f27bf4231223f7",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "nicoboou/IDRCell100k",
+      "revision": "ba8b95954a27cac131902c2154083a5f02e14b8e",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 308899,
+      "large": false
+    },
+    {
+      "repo_id": "m-a-p/FineFineWeb",
+      "revision": "7fd92dc825a75cbff271a5a52eea0eda91a2c112",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 1646140,
+      "large": true
+    },
+    {
+      "repo_id": "epfml/FineWeb-HQ",
+      "revision": "e58199cdd52438d94405df1a4d8630cc5f13bf84",
+      "declared_license": "odc-by",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 2445786576,
+      "large": true
+    },
+    {
+      "repo_id": "mvp-lab/LLaVA-OneVision-1.5-Mid-Training-85M",
+      "revision": "6ca51e61173b24e5b80958a5ed1383aad2981fd8",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 91493097,
+      "large": true
+    },
+    {
+      "repo_id": "Lichess/standard-chess-games",
+      "revision": "de4e636eddf568a9394cc01fb0b9e1da04a6babf",
+      "declared_license": "cc0-1.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 7136017970,
+      "large": true
+    },
+    {
+      "repo_id": "HuggingFaceFW/fineweb-edu",
+      "revision": "87f09149ef4734204d70ed1d046ddc9ca3f2b8f9",
+      "declared_license": "odc-by",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 3496736741,
+      "large": true
+    },
+    {
+      "repo_id": "applied-ai-018/pretraining_v1-omega_books",
+      "revision": "54b95f40c52b3d03bb07e672ab05a0e677d3e0a7",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 103802366,
+      "large": true
+    },
+    {
+      "repo_id": "xlangai/ubuntu_osworld_file_cache",
+      "revision": "1e112283c4ecb08d6fed8069bca7de74fa2f12aa",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": null,
+      "large": false
+    },
+    {
+      "repo_id": "wikimedia/wikipedia",
+      "revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+      "declared_license": "cc-by-sa-3.0",
+      "license_family": "copyleft",
+      "non_english": true,
+      "exposes_croissant": true,
+      "num_rows": 61614907,
+      "large": true
+    },
+    {
+      "repo_id": "OPR-Project/OxfordRobotCar_OpenPlaceRecognition",
+      "revision": "14ac6ad1df250dd70efab18c097a731d4cb5a554",
+      "declared_license": "cc-by-nc-sa-4.0",
+      "license_family": "non_commercial",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": null,
+      "large": false
+    },
+    {
+      "repo_id": "ayuo/hd_tmp",
+      "revision": "9d6e041a87e3a2f381bb747acfdd0e0bdd32a3b4",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": false,
+      "num_rows": null,
+      "large": false
+    },
+    {
+      "repo_id": "roisincrtai/ptb-xl-1.0.3",
+      "revision": "8caff550132c41fe8cf8a9bcf9b2d0300263b725",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 87858,
+      "large": false
+    },
+    {
+      "repo_id": "ryanmarten/OpenThoughts-1k-sample",
+      "revision": "a82400884621626d41bef89b7604f8054e7e00e0",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 2000,
+      "large": false
+    },
+    {
+      "repo_id": "mlfoundations/MINT-1T-HTML",
+      "revision": "906a8b85cea61198ff7339c4dd711ad0b5361847",
+      "declared_license": "cc-by-4.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 897871,
+      "large": false
+    },
+    {
+      "repo_id": "lerobot/FineART",
+      "revision": "15746b76ddc21ffd38d73888fefe2e7a1496385b",
+      "declared_license": "cc-by-4.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "pulmo/ncbi-genbank-complete",
+      "revision": "7f2fd793a45f5013a81c7890aed7c83e5c22ff1a",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "open-cn-llm-leaderboard/requests",
+      "revision": "3bb01c2e65eef4e0b4d19bf1ccff139b20af3eaf",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "world-igr-plum/regions",
+      "revision": "f15723da1af8e80ab4eeff9c8d92d030875e981e",
+      "declared_license": "mit",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "huggingface/DEH-image-scan-data",
+      "revision": "efac82456c5aaa4572d0faadd438f1da1777a1cd",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 6,
+      "large": false
+    },
+    {
+      "repo_id": "open-index/hacker-news",
+      "revision": "c54ced5973b95d80cd934b8921f44ec8d87c3cd1",
+      "declared_license": "odc-by",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "ThomasTheMaker/ptb-xl-ecg",
+      "revision": "ef558e84986fa2218f35c93c721fe605f5a02b6a",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 87858,
+      "large": false
+    },
+    {
+      "repo_id": "visionhdstream/data-vision-01",
+      "revision": "a7055cc76c653c252a9a312d472df14d72261f2b",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 222,
+      "large": false
+    },
+    {
+      "repo_id": "TIGER-Lab/MMLU-Pro",
+      "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+      "declared_license": "mit",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 12102,
+      "large": false
+    },
+    {
+      "repo_id": "Salesforce/GiftEvalPretrain",
+      "revision": "6830b624de7ed2b3d3e5b85bb6959d81dcc5d874",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "hallucinations-leaderboard/requests",
+      "revision": "237c75394f04421550a4109eb10d9b7c1ab6d6c3",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "anon8231489123/ShareGPT_Vicuna_unfiltered",
+      "revision": "192ab2185289094fc556ec8ce5ce1e8e587154ca",
+      "declared_license": "apache-2.0",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": null,
+      "large": false
+    },
+    {
+      "repo_id": "HuggingFaceFW/fineweb",
+      "revision": "9bb295ddab0e05d785b879661af7260fed5140fc",
+      "declared_license": "odc-by",
+      "license_family": "permissive",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 52453695892,
+      "large": true
+    },
+    {
+      "repo_id": "ahnaftaz/locus-commit-pool-v1",
+      "revision": "6883f90b50d88cda272b63ef49d0493ad6a9b476",
+      "declared_license": "other",
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    },
+    {
+      "repo_id": "carlotabronze/sm-stuff",
+      "revision": "009a2baf2184546519b82be3b99910a52106c958",
+      "declared_license": null,
+      "license_family": "other_or_unknown",
+      "non_english": false,
+      "exposes_croissant": true,
+      "num_rows": 0,
+      "large": false
+    }
+  ]
+}

@@ -16,3 +16,12 @@ SNAPSHOT_SCHEMA = "snapshot/1"
 FINDINGS_SCHEMA = "findings/1"
 PACK_SCHEMA = "pack/1"
 BENCH_MANIFEST_SCHEMA = "bench-manifest/1"
+
+# --- Extension E1 (dataset verification core) ------------------------------
+DSNAPSHOT_SCHEMA = "dsnapshot/1"
+PACK_SCHEMA_2 = "pack/2"
+BENCH_MANIFEST_D_SCHEMA = "bench-manifest-d/1"
+DSAMPLE_RULE = "dsample/1"
+DSAMPLE_SEED = 20261111
+DSAMPLE_CAP_ROWS = 2000
+DSAMPLE_CAP_BYTES = 20 * 1024 * 1024

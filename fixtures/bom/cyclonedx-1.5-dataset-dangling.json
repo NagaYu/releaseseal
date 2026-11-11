@@ -1,0 +1,48 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "bom-ref": "acme/corpus@v2",
+      "type": "data",
+      "data": {
+        "type": "dataset"
+      },
+      "name": "acme/corpus",
+      "version": "v2",
+      "licenses": [
+        {
+          "license": {
+            "id": "cc-by-4.0"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "train.parquet",
+      "type": "data",
+      "data": {
+        "type": "dataset"
+      },
+      "name": "train.parquet",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0ee07676a879ae1911ce80c5d1b8a933eb89ce6673fd4b67e474ebcd89548f8f"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "acme/corpus@v2",
+      "dependsOn": [
+        "train.parquet",
+        "missing-shard"
+      ]
+    }
+  ]
+}

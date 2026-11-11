@@ -47,6 +47,28 @@ are gated; their config was not fetchable, so inspection was card-metadata only.
 (documentation presence) is a pattern-based screening signal — read a V4 finding as a place to check.
 V1–V3 / V5–V7 are artifact checks (hashes, config, lineage, loadability).</p>
 
+<h2>Datasets — Part B-D (36 real datasets, Module D)</h2>
+<p class="mut">Pinned revisions, frozen dataset verifier, metadata + capped sample only.
+36/36 audited, 0 errors, $0. W-checks bind only to structured declarations.</p>
+<p class="note"><strong>Measurement, not falsification.</strong> Real dataset cards carry almost
+none of the machine-readable declarations the W-checks grade, so there is almost nothing to
+violate — the module's real-data value is <strong>measurement at stated coverage</strong>.</p>
+<table><thead><tr><th>Part B-D headline</th><th>value</th></tr></thead><tbody>
+<tr><td>Card completeness gaps (W8, signal only)</td><td><strong>100% (36 / 36)</strong></td></tr>
+<tr><td>Datasets with ≥1 counted finding</td><td>13 / 36</td></tr>
+<tr><td>License inconsistent (W1)</td><td>0 / 36</td></tr>
+<tr><td>License undeterminable (W1, out-of-table)</td><td>10 / 36</td></tr>
+<tr><td>W4 PII detector hits (format only, masked)</td><td>7 / 36 datasets — email 29, card_luhn 9, ipv4 2</td></tr>
+<tr><td>Content-sample coverage</td><td>19 / 36 (17 / 36 binary or not row-served)</td></tr>
+<tr><td>Preregistered predictions</td><td>2 HIT / 4 MISS (disclosed)</td></tr>
+</tbody></table>
+<p class="mut">The 9 <code>card_luhn</code> hits on web text are Luhn-valid-by-chance strings, not
+confirmed card numbers. One dataset (<code>wikimedia/wikipedia</code>) produced 321 language
+findings that trace to single-config sampling — a coverage limitation of the audit, not a
+falsification. GATE E1 / GATE E2 both PASS on synthetic splits (recall 1.000, clean FP 0.000);
+a co-designed synthetic recall is not a real-world recall estimate — Part B-D is the honest
+real-data statement. Full per-dataset results ship with the bench dataset repo.</p>
+
 <h2>Representative evidence pack</h2>
 <p>Select a pack to view its findings and chain tip. Each is hash-chained and re-verifiable offline
 with <code>releaseseal verify-pack</code>.</p>

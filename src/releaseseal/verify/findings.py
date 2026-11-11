@@ -41,6 +41,14 @@ def gate_counted(findings: list) -> list:
     return [f for f in findings if not f.get("heuristic") and f["check"] != "V8"]
 
 
+def gate_counted_dataset(findings: list) -> list:
+    """Dataset findings that count toward the gate/scorer (SPEC.md §E1.3, D-31):
+    ``heuristic == false`` AND ``severity != "info"``. So W8 (info+heuristic),
+    ``contamination_measured`` and ``dedup_measured`` (both info) never count.
+    """
+    return [f for f in findings if not f.get("heuristic") and f.get("severity") != "info"]
+
+
 def max_severity(findings: list) -> Optional[str]:
     counted = gate_counted(findings)
     if not counted:

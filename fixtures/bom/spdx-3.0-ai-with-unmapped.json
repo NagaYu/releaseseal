@@ -1,0 +1,18 @@
+{
+  "@context": "https://spdx.org/rdf/3.0.0/spdx-context.jsonld",
+  "@graph": [
+    {
+      "spdxId": "spdx:pkg-m",
+      "type": "software_Package",
+      "name": "acme/m",
+      "versionInfo": "r1",
+      "hasConcludedLicense": "apache-2.0",
+      "typeOfModel": "transformer"
+    },
+    {
+      "spdxId": "spdx:c*",
+      "type": "simplelicensing_LicenseExpression",
+      "licenseExpression": "apache-2.0"
+    }
+  ]
+}

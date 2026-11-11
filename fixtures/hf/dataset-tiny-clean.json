@@ -1,0 +1,88 @@
+{
+  "info": {
+    "id": "bench/clean-dataset",
+    "sha": "revcleanaaaa",
+    "cardData": {
+      "license": "apache-2.0",
+      "language": [
+        "en"
+      ],
+      "annotations": {
+        "pii": "none",
+        "dedup_rate": 0.0,
+        "sources": [
+          {
+            "name": "public-web",
+            "license": "apache-2.0"
+          }
+        ],
+        "file_inventory": [
+          {
+            "path": "train.jsonl",
+            "rows": 3
+          }
+        ],
+        "decontaminated_against": [
+          "benchsuite-alpha"
+        ]
+      }
+    }
+  },
+  "tree": [
+    {
+      "path": "README.md",
+      "size": 400
+    },
+    {
+      "path": "LICENSE",
+      "size": 120
+    },
+    {
+      "path": "train.jsonl",
+      "size": 300,
+      "lfs": {
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "size": 300
+      }
+    }
+  ],
+  "files": {
+    "README.md": "---\nlicense: apache-2.0\n---\n# Clean dataset\nFreely licensed English text.\n",
+    "LICENSE": "Apache License 2.0\n"
+  },
+  "splits": [
+    {
+      "name": "train",
+      "num_rows": 3,
+      "num_bytes": 300
+    }
+  ],
+  "rows": {
+    "train": [
+      {
+        "text": "the research corpus collects freely licensed articles about natural science and public history"
+      },
+      {
+        "text": "volunteers transcribed old community newsletters describing local gardening clubs and seasonal harvest festivals"
+      },
+      {
+        "text": "the collection gathers open recipes for soups stews and baked bread from many regions"
+      }
+    ]
+  },
+  "croissant": {
+    "license": "apache-2.0",
+    "distribution": [
+      {
+        "name": "train.jsonl",
+        "contentUrl": "train.jsonl",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "recordSet": [
+      {
+        "name": "default"
+      }
+    ]
+  }
+}

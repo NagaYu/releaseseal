@@ -408,3 +408,318 @@ claim whose benchmark is structured, the values are compared on a common 0-100
 scale (a value ≤ 1 is read as a fraction and ×100); a disagreement beyond 2.0
 fires `eval_value_mismatch`, a scale-only agreement is silent, and a benchmark
 with no structured source remains `unsourced_claim`. Both-direction tests added.
+
+---
+
+## Extension program — Phase E1 (dataset-verification core)
+
+Interpretation decisions for the dataset core (SPEC.md "Extension E1"; design
+`releaseseal-extension-design.md` §3). Where the Phase-E1 prompt and the design
+disagree, the prompt's pinned values win and the choice is recorded here (the
+prompt's own rule). All E1 choices take the most conservative reading when a
+pinned detail is under-determined (prompt §10: narrower claim surface, stricter
+determinism), never silently widening scope.
+
+### D-27 — dsnapshot declaration extraction: wrong-type → empty, never raise
+
+`card.declarations` (§E1.1.1) is the only W1–W7 claim surface and is extracted
+deterministically from card YAML. A field with the wrong type yields its empty
+value and never throws: **scalar** fields (`license`, `pii`, `dedup_rate`) → `null`;
+**collection** fields (`languages`, `decontaminated_against`, `sources`,
+`file_inventory`, `language_shares`) → `[]`/`{}`. The prompt says "wrong type →
+null"; for the collection-typed fields the empty collection is the type-correct
+analogue of null (it leaves the dependent W-check silent, the conservative
+outcome). `dedup_rate` must be a real number in `[0,1]` (bool rejected; out of
+range → null). `pii` must be exactly `"none"`/`"present"`, else null. Invalid
+`sources`/`file_inventory`/`language_shares` items are dropped individually.
+`language_shares` ({code:number}) was added to the vocabulary per the W7 pin.
+
+### D-28 — dsample/1 pinned algorithm
+
+Per-split RNG seed is `int.from_bytes(sha256(f"{seed}:{name}").digest()[:8],"big")`,
+**not** Python's `hash()` (which is salted by `PYTHONHASHSEED` and would break
+cross-process reproducibility). Selection is reservoir Algorithm R
+(`rng.randint(0,i)`; replace slot iff `< cap_rows`); retained rows are emitted
+**sorted by ascending index**. Splits are processed in ascending name order. The
+byte cap is enforced after reservoir selection by walking retained rows in
+(split-name, index) order and **skipping** any row that would exceed `cap_bytes`
+(continuing past it), so as many small rows as fit are packed deterministically.
+`text` = first STRING field in `text|content|prompt|completion|instruction` order,
+else the row's canonical JSON (D-09 bytes decoded). Byte-identical for equal
+(input, seed) — tested.
+
+### D-29 — W1 LICENSE-file identification leg is silent (license-terms-v1 unchanged)
+
+The prompt pins LICENSE-file license identification "by the license-terms table's
+file-fingerprint entries" **and** requires `license-terms-v1` be reused unchanged.
+The shipped pack ships no file-fingerprint entries, and adding them would both
+change the frozen model Part B `rule_packs` and break the `pack/1` byte-for-byte
+guarantee (D-35). Conservative resolution: the LICENSE-file leg is inert (silent),
+exactly as the prompt permits ("if no LICENSE file or unidentifiable, that leg is
+silent"). W1 therefore operates on declared-vs-croissant disagreement
+(`license_inconsistent`, high) and declared-not-in-table (`license_unknown`, low).
+Recorded as a coverage limitation for a future rule-pack revision.
+
+### D-30 — W3 declared-total-size leg is silent; row-fact association
+
+The closed declaration vocabulary (§E1.1.1) carries no declared total-size field
+(`file_inventory` items hold `{path, rows}` only; Croissant distribution has no
+size), so the `size_mismatch` leg has no declared input and is silent by
+construction. W3 fires via `declared_file_missing`, `undeclared_data_file`
+(data extensions `.jsonl/.csv/.parquet/.txt/.json`, only when an inventory is
+declared), and `row_count_mismatch`. The row fact for a declared file is the
+`num_rows` of the split whose name equals the file's basename without its data
+extension (`train.jsonl` → split `train`) — exact for bench, split metadata for hf.
+
+### D-31 — dataset gate/scorer counting rule + PII masking
+
+Recall/FP count only findings with `heuristic == false` **and** `severity !=
+"info"` (`gate_counted_dataset`), per the prompt's §7 scorer rule. This excludes
+W8 (info+heuristic) and the `contamination_measured` / `dedup_measured` info
+measurements. **Masking (hard):** any detected PII/secret value appears in
+findings, packs, reports and test expectations only masked — first 2 + last 2
+characters (`ab••••yz`); a value of length ≤ 4 is fully bulleted. Tests assert the
+full values never appear. `pii == "none"` → `pii_claim_falsified` (high);
+otherwise `pii_detected` (medium).
+
+### D-32 — W5 normalization + contamination-v1 builder
+
+W5 normalization (pinned): lowercase → collapse whitespace to one space → **delete**
+characters not in `[a-z0-9 ]` → split on whitespace; a row shares a 13-gram with a
+suite item on word-level 13-grams. Per-suite rate = contaminated rows / total
+sampled rows; `decontamination_claim_falsified` (high) if declared decontaminated
+and rate > 0, else `contamination_measured` (info). `contamination-v1`
+(benchsuite-alpha/beta, 40 items each) is built by the checked-in
+`rules.build_packs.build_contamination_pack()` from index-deterministic templates;
+the committed JSON is source of truth and regenerates byte-identically (tested).
+
+### D-33 — W6 MinHash construction
+
+Shingles = word 5-grams of the W5-normalized text. Base hash `h =
+int(blake2b(shingle, digest_size=8)) mod P`, `P = 2^61−1` (stdlib, unsalted). 128
+permutations `(a_i,b_i)` from `random.Random(20261111)` (`a=randrange(1,P)`,
+`b=randrange(0,P)`, i=0..127 in order); `minhash_i = min((a_i·h+b_i) mod P)`.
+Estimated Jaccard = matching positions / 128; near-dup ≥ 0.8; a row with < 5 words
+has no shingles and no partner. Measured rate = rows with ≥1 partner / total. W6
+always emits exactly one finding: `dedup_rate_mismatch` (medium) iff a numeric
+`dedup_rate` is declared and `|measured − declared| > 0.05`, else `dedup_measured`
+(info).
+
+### D-34 — lid-v1 construction + W7 semantics
+
+`lid-v1` is a dependency-free character 3/4/5-gram classifier over per-language
+profiles built by `rules.build_packs.build_lid_pack()` from short seed paragraphs
+(composed for this purpose; `en/es/fr/de/ja/zh`). `logprob = round(log(count/total),
+6)` over n-grams pooled across n=3,4,5; `floor_logprob = round(log(1e-6),6)`;
+`margin = 1.0`. Scoring **sums** logprobs over the text's n-grams (so confidence
+scales with length and the margin separates cleanly); classify = argmax, `und` when
+top − runner-up < margin. The committed profile file is source of truth and
+regenerates byte-identically (tested). W7 per-language share = rows classified to a
+language / total; with `language_shares`, `|measured − declared| > 0.10` →
+`language_share_mismatch`; without, measured 0 for a declared language →
+`declared_language_absent`, and an undeclared language ≥ 0.20 →
+`undeclared_language_dominant`.
+
+### D-35 — pack/2 for datasets; model packs stay pack/1 byte-for-byte
+
+Dataset snapshots (`dsnapshot/1`) produce `pack/2` (header `pack_schema:"pack/2"`;
+`snapshot_ref` gains `snapshot_kind:"dataset"`). Model snapshots (`snapshot/1`)
+keep the `pack/1` code path **byte-for-byte** — no `snapshot_kind`, `pack_schema
+"pack/1"` — so the frozen model packs reproduce exactly (asserted in
+`test_evidence_d.py`). `verify_pack` accepts both schemas; the `content_hash`
+helper is schema-agnostic (excludes only `snapshot_sha256`), satisfying D-09 for
+both snapshot kinds.
+
+### D-36 — Part A-D near-miss clean `pii:"present"` uses detector-negative content
+
+A clean case must raise no counted finding, and `pii_detected` (medium) counts.
+So the "correctly declared PII-bearing" near-miss clean cases declare
+`pii:"present"` but use detector-negative text (no sample hit → W4 silent,
+`expected == []`). The honest-disclosure semantics the prompt names (declared
+present + a detector hit → `pii_detected` medium, never falsification, never high)
+are exercised directly in a unit test rather than as a bench clean, keeping the
+clean FP at 0 without weakening the claim. Part A-D: 120 cases, seed 20261111,
+`cases_sha256` `0e2633a2…`; GATE E1 recall all 1.000, clean FP 0.000.
+
+### D-37 — W1 LICENSE-file leg goes live via dataset-hub-v1 1.1.0 (E1's D-29 superseded in effect)
+
+Phase-E2 Step 1 switches on W1's third leg. D-29 parked it as silent because the
+only pinned place for identification data was `license-terms-v1`, which must stay
+byte-unchanged (it feeds the frozen model Part B `rule_packs` and the `pack/1`
+byte-for-byte guarantee, D-35). Resolution: the identification data lives in
+**`dataset-hub-v1`** instead, bumped `1.0.0 → 1.1.0`, as `license_file_phrases`
+(per id: `required` — ALL must appear — and `forbidden` — NONE may appear) plus
+`license_file_order` (evaluation order; significant, e.g. `lgpl-3.0-only` before
+`gpl-3.0-only`). `license-terms-v1` is untouched, so D-29's hard constraint
+stands and the model side is unaffected. Normalization is pinned in SPEC and in
+the pack (`license_file_normalization`): lowercase → drop any line containing
+`copyright`/`(c)` → collapse whitespace → strip; phrases match as substrings.
+LICENSE text reaches the check through a new **optional** `dsnapshot/1` field
+`license_files` (`{path, text}`), captured by both adapters for
+`LICENSE*`/`COPYING*` files, path-sorted; the first id that identifies wins. The
+key is present only when a LICENSE file was captured, so every Part A-D bench
+snapshot is byte-identical to E1 (`cases_sha256` `0e2633a2…` unchanged, recall
+1.000, clean FP 0.000 re-verified). No LICENSE file or no identified id → the leg
+is silent (never guessed), exactly as the prompt permits.
+
+### D-38 — contamination-v1 1.1.0: real benchmark suites as 13-gram hashes
+
+Phase-E2 Step 2 adds real public benchmark suites to `contamination-v1`
+(`1.0.0 → 1.1.0`). Hard constraint from the design (§7 no absence certification,
+and avoiding redistribution of benchmark text): a real suite stores **only the
+sha256 hashes of its normalized word 13-grams** (W5 normalization, D-32) under
+`kind:"ngram-hashes"`, never the raw benchmark text. The two synthetic suites
+are untouched (still plain `items`, no `kind` key), so their byte-identical
+regeneration test is unchanged. W5 gains a hashed-suite leg: a row is
+contaminated iff any of its 13-gram sha256 hashes is in the suite set; the shared
+`ngram_hash_set` helper is the single source of the hashing so the builder and
+the check can never drift. Suites: `gsm8k-test` (`openai/gsm8k`/main/test,
+`question`; rev `740312ad…`, 1319 items → 45,164 hashes) and `squad-validation`
+(`rajpurkar/squad`/plain_text/validation, `context`; rev `7b6d24c4…`, 523 unique
+contexts from the first 3000 rows → 46,276 hashes). SQuAD *questions* are mostly
+shorter than 13 words (no 13-gram), so the `context` field is used and contexts
+are deduped — recorded in the fixture. The sources are fetched once
+(`build_packs fetch`, HF datasets-server) into `fixtures/contamination/*.json`
+(the pinned source snapshots, checked in); `build_contamination_pack()` and the
+tests only read them, so regeneration is byte-identical offline. A suite that
+cannot be fetched is skipped and reported not-run, never fabricated. Re-verified:
+dataset bench clean FP stays 0 (no spurious real-suite overlap on the synthetic
+clean cases), recall 1.000, `cases_sha256` `0e2633a2…` unchanged.
+
+### D-39 — Croissant license normalized to an SPDX id (W1 real-data integrity)
+
+HF auto-generates Croissant metadata for most datasets, and its `license` field
+is frequently a URL (`https://choosealicense.com/licenses/apache-2.0/`) or an
+SPDX URL rather than the plain id the card declares. Fed raw into W1's
+declared-vs-croissant leg, that would manufacture `license_inconsistent` (high)
+on virtually every Croissant dataset — a format artifact, not a real
+inconsistency, and a dishonest Part B-D headline. `croissant_subset` now
+normalizes the license to an SPDX-ish id: last path segment of a URL, drop a
+`.html/.txt/.md/.json` suffix, lowercase/strip. A plain id (bench data, author
+Croissant) is unchanged apart from case, so the Part A-D bench and its
+`cases_sha256` are unaffected. A genuine declared-vs-Croissant license
+disagreement still fires; only format noise is removed.
+
+### D-40 — Part B-D audit operational pins (selection, sampling cap, on-disk redaction)
+
+Part B-D audits other people's public datasets live. Three operational choices,
+all recorded so the run is reproducible and honest:
+
+1. **Selection** (`select_partbd.py`, frozen to `bench/partbd/datasets.json`,
+   `partbd-datasets/1`): HF datasets sorted by downloads desc; keep public &
+   not gated (`gated == False`) & not disabled & with ≥1 inventoriable data file
+   (tree ext in `.jsonl/.csv/.parquet/.txt/.json`); greedily fill the strata
+   (≥6 non-English/multilingual, ≥4 Croissant, ≥4 >1M rows, license families
+   spread). Revisions pinned to the HEAD sha at freeze. Gated datasets are
+   excluded, never authenticated against. Frozen & committed before the audit.
+2. **Sampling cap**: the live `DatasetHttpFetcher` fetches the datasets-server
+   rows endpoint for the first `max_splits = 2` splits, `rows_per_split = 200`
+   (a prefix window, §3.2's "first-K rows where row access is structured"). The
+   rule id stays `dsample/1`; the actual parameters are recorded in
+   `summary.json.sample_params`, and each snapshot keeps the TRUE split totals
+   (datasets-server `/size`) so coverage (sampled / total) is honest. A dataset
+   whose rows cannot be fetched (script/unsupported) records an empty sample;
+   one dataset never aborts the run.
+3. **On-disk redaction**: the evidence pack's W4 findings are masked (D-31). The
+   on-disk snapshot file additionally OMITS the raw sample row text
+   (`sample.rows = []`, `rows_omitted_for_privacy`, `content_redacted_for_privacy`)
+   — raw third-party content / possible PII is never persisted to the repo. The
+   pack's `snapshot_ref.snapshot_sha256` is the hash of the full verified
+   snapshot; the redacted file records it as metadata, not as a re-validatable
+   body.
+
+### D-41 — Part B-D fetcher picks the largest ROW-SERVED config (coverage, not tuning)
+
+`DatasetHttpFetcher`'s config choice was corrected twice **before any audit
+result was committed**, on principled coverage grounds, never toward the frozen
+predictions:
+1. v1 chose `configs[0]` — for `wikimedia/wikipedia` a tiny per-language config,
+   so content-rich datasets showed `cov=0` (a tooling artifact).
+2. v2 chose the config with the most rows — but the largest config is sometimes
+   not row-served by datasets-server (e.g. `m-a-p/FineFineWeb`), which shadowed a
+   smaller served text config and *lost* coverage.
+3. **Final: the largest config whose rows endpoint actually serves rows** (try
+   configs by total-rows desc, first that returns rows wins; `splits` reflects
+   the config used, keeping the true totals as the coverage denominator). This
+   recovers real content for wikipedia / FineFineWeb / fineweb-edu / MINT-1T.
+The predictions (`reports/phase-e2-predictions.md`) stay frozen and untouched;
+the final audit is reported as-is, hit or miss. Datasets datasets-server
+genuinely does not row-serve at all (single-file `ShareGPT_Vicuna_unfiltered`,
+some binary/parquet-only corpora) still record an empty sample + coverage note;
+sampling their content would need a bulk download (out of scope, $0). A burst of
+row requests triggered datasets-server rate-limiting mid-run (datasets that
+provably serve rows showing `cov=0`), which corrupted coverage; the fetcher now
+spaces calls (`min_interval`) and retries 429/5xx with backoff, so the recorded
+run's coverage reflects what datasets-server actually serves, not throttling.
+Coverage is still reported per dataset exactly as measured.
+
+---
+
+### D-42 — Module B export takes an optional snapshot; snapshot digest is a property, not a file hash
+
+**Context.** SPEC Module B / extension design §4 describe `bom export` as taking an
+evidence pack (`releaseseal bom export <pack.json>`), yet also require the exported
+CycloneDX document to carry "files as components with their sha256 hashes where
+known" and the "declared license". An evidence pack (`pack/1`/`pack/2`) references
+its snapshot by hash (`snapshot_ref.snapshot_sha256`) but does **not** embed the
+file inventory or the declared license — those live in the snapshot.
+
+**Decision.** `export_bom(pack, snapshot=None)` and the CLI `bom export <pack.json>
+[--snapshot <snap.json>]`. Pack-only export emits the release as the metadata
+component plus the findings summary (valid, and round-trips to the release
+component). `--snapshot` adds one `type:"file"` component per snapshot file with a
+known sha256 (path-sorted) and the release's declared license. The snapshot digest
+travels as `properties["releaseseal:snapshot_sha256"]`, **never** as a component
+`SHA-256` hash: it is the canonical digest of the snapshot JSON (D-09), not of any
+file, and asserting it as a file hash would be a false claim a consumer could try
+to verify against bytes. The optional flag is a superset of the named CLI (the
+pack-only form still works), so no existing contract is broken.
+
+### D-43 — "other"-kind components are carried AND counted; SPDX non-packages are `unmapped`
+
+**Context.** The import spec says CycloneDX components that are neither
+machine-learning-model nor data/dataset are "recorded as ignored-with-count", while
+the `bomfacts/1` shape lists `kind: "model"|"dataset"|"other"` — i.e. "other" is a
+first-class component kind.
+
+**Decision.** Reconciled with no contradiction: every CycloneDX component is
+transcribed into `components[]` with kind model/dataset/other (so it round-trips
+and stays visible), and non-model/dataset components are **additionally** counted
+in `facts.ignored` keyed by raw type (e.g. `{"file":2,"library":1}`). This is the
+transparency count the design asks for without dropping data. For SPDX, an element
+that maps to no package at all is a distinct outcome: counted in `facts.unmapped`
+(an integer), never guessed into a component. `verify_bom` surfaces both in
+`counts.ignored` / `counts.unmapped`.
+
+### D-44 — SPDX hash algorithm labels normalized to the CycloneDX spelling on import
+
+**Context.** CycloneDX writes `{"alg":"SHA-256", ...}`; SPDX 3.0 writes
+`{"algorithm":"sha256", ...}`. `verify_bom` compares a component's hash against a
+snapshot's `sha256` and against other components' hashes by algorithm key.
+
+**Decision.** On SPDX import, the algorithm label is normalized to the CycloneDX
+spelling (`sha256`→`SHA-256`, `sha512`→`SHA-512`, etc.); the hash **content** is
+never altered. So a hash imported from an SPDX document compares correctly against
+a CycloneDX hash and against a snapshot's streamed/LFS `sha256`. Unknown algorithm
+names are kept verbatim. This is a label canonicalization, not a semantic judgement
+(the decidable-subset rule is untouched).
+
+### D-45 — GATE E2 verdict computed by applying the fixed E2 bars to the scorer's raw output
+
+**Context.** The GATE E2 bars are per-class recall ≥ **0.85** for every W1–W7 and
+clean FP ≤ **5%** (SPEC §9b/§E1.9 discipline; Phase-E2 scoring prompt). The frozen
+scorer (`src/releaseseal/bench/score_d.py`) exposes exactly one gate helper,
+`gate_e1(...)`, whose default `recall_floor` is **0.90** (the E1 floor), and the
+`bench-d score` CLI prints a line labelled "GATE E1 (recall ≥ 0.9, …)".
+
+**Decision.** The GATE E2 verdict was computed by applying the fixed 0.85 / 0.05
+bars **by hand** to the scorer's raw `recall` / `clean_fp_rate` output, rather than
+adding an E2 gate function or passing `recall_floor=0.85` through a changed code
+path. Changing or extending the verifier/scorer before or during the single
+holdout scoring is forbidden (Phase-E2 hard rule: a re-score after any code change
+voids the measurement), so the scorer was run exactly as frozen and the bar was
+applied in the report. The measured recall (1.000 on every class) clears both the
+0.85 and the 0.90 floors and the measured clean FP (0.000) clears the 0.05 ceiling,
+so the hand-applied E2 verdict and the CLI's E1-labelled line agree. Recorded for
+provenance: the verdict is PASS against the **E2** bars, not merely against the
+scorer's built-in E1 line.

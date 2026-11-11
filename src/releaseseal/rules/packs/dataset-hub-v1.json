@@ -1,0 +1,64 @@
+{
+  "pack_id": "dataset-hub-v1",
+  "version": "1.1.0",
+  "source": "Hugging Face dataset-card declaration conventions (closed-vocabulary field presence; SPEC.md §E1.1.1/§E1.3 W8) plus LICENSE-file identification data for the W1 file leg (§E1.3 W1, Phase-E2). W8 findings are heuristic/info and never gate-counted; the license_file_phrases data drives license_inconsistent (high) only on an identified-vs-declared/croissant disagreement.",
+  "fields": [
+    {"id": "dhub.license", "field": "license", "label": "license declared in card front matter"},
+    {"id": "dhub.languages", "field": "languages", "label": "language codes declared"},
+    {"id": "dhub.pii", "field": "pii", "label": "PII annotation (none/present)"},
+    {"id": "dhub.sources", "field": "sources", "label": "itemized source datasets with licenses"},
+    {"id": "dhub.file_inventory", "field": "file_inventory", "label": "declared per-file inventory"},
+    {"id": "dhub.dedup_rate", "field": "dedup_rate", "label": "declared near-duplicate rate"},
+    {"id": "dhub.decontaminated_against", "field": "decontaminated_against", "label": "declared decontamination suites"}
+  ],
+  "license_file_normalization": "lowercase -> drop any line containing 'copyright' or '(c)' -> collapse all whitespace runs to a single space -> strip. Phrases are matched as substrings of the resulting single-line normalized text.",
+  "license_file_order": [
+    "lgpl-3.0-only",
+    "gpl-3.0-only",
+    "mpl-2.0",
+    "apache-2.0",
+    "bsd-3-clause",
+    "cc-by-nc-4.0",
+    "cc-by-4.0",
+    "cc0-1.0",
+    "mit"
+  ],
+  "license_file_phrases": {
+    "lgpl-3.0-only": {
+      "required": ["gnu lesser general public license", "version 3, 29 june 2007"],
+      "forbidden": []
+    },
+    "gpl-3.0-only": {
+      "required": ["gnu general public license", "version 3, 29 june 2007"],
+      "forbidden": ["lesser general public license"]
+    },
+    "mpl-2.0": {
+      "required": ["mozilla public license version 2.0"],
+      "forbidden": []
+    },
+    "apache-2.0": {
+      "required": ["apache license", "version 2.0, january 2004"],
+      "forbidden": []
+    },
+    "bsd-3-clause": {
+      "required": ["redistribution and use in source and binary forms", "neither the name of"],
+      "forbidden": []
+    },
+    "cc-by-nc-4.0": {
+      "required": ["creative commons attribution-noncommercial 4.0 international"],
+      "forbidden": []
+    },
+    "cc-by-4.0": {
+      "required": ["creative commons attribution 4.0 international"],
+      "forbidden": ["noncommercial"]
+    },
+    "cc0-1.0": {
+      "required": ["cc0 1.0 universal"],
+      "forbidden": []
+    },
+    "mit": {
+      "required": ["permission is hereby granted, free of charge, to any person obtaining a copy", "to deal in the software without restriction"],
+      "forbidden": ["apache license", "gnu general public", "mozilla public license", "creative commons"]
+    }
+  }
+}

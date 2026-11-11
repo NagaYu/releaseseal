@@ -1,0 +1,33 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "bom-ref": "acme/tiny@r3",
+      "type": "machine-learning-model",
+      "name": "acme/tiny",
+      "version": "r3",
+      "licenses": [
+        {
+          "license": {
+            "id": "mit"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "weights.bin",
+      "type": "file",
+      "name": "weights.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "92fd8db60f8d544c2519c0c5506c5a23ae4d2932da6508f03e9e295ac26f6d2d"
+        }
+      ]
+    }
+  ]
+}

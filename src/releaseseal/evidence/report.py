@@ -17,7 +17,22 @@ _CHECK_TITLES = {
     "V6": "Evaluation claim inconsistency",
     "V7": "Release completeness",
     "V8": "Undeclared derivation (heuristic signal)",
+    "W1": "License consistency",
+    "W2": "Declared source-license rollup",
+    "W3": "Inventory truth",
+    "W4": "PII falsification",
+    "W5": "Benchmark contamination (measured)",
+    "W6": "Dedup measurement",
+    "W7": "Composition drift",
+    "W8": "Dataset-card completeness (heuristic signal)",
 }
+
+_DATASET_CAVEAT = (
+    "Dataset content checks (W4–W7) run on the pinned deterministic sample "
+    "(`dsample/1`), not the full corpus. Absence of a PII/contamination/dedup "
+    "finding means **none was detected in the sample**, never that the corpus is "
+    "free of it; the pack does not certify absence."
+)
 
 _DISCLAIMER = (
     "This is an **evidence pack**, not a certificate. It reports the "
@@ -35,10 +50,16 @@ def render_report(pack: dict) -> str:
 
     source = snap_ref.get("source", {})
     rel_id = source.get("repo_id") or source.get("path") or "(unknown release)"
+    is_dataset = snap_ref.get("snapshot_kind") == "dataset"
+    counted_label = "W1–W7" if is_dataset else "V1–V7"
+    heur_label = "W8" if is_dataset else "V8"
 
     lines = [f"# {APP_CODENAME} evidence report", ""]
     lines.append(_DISCLAIMER)
     lines.append("")
+    if is_dataset:
+        lines.append(_DATASET_CAVEAT)
+        lines.append("")
     lines.append("## Release")
     lines.append("")
     lines.append(f"- Release: `{rel_id}`")
@@ -50,14 +71,23 @@ def render_report(pack: dict) -> str:
     lines.append(f"- Pack chain tip: `{pack.get('chain_tip')}`")
     lines.append("")
 
-    gate_findings = [f for f in findings if not f.get("heuristic") and f["check"] != "V8"]
+    if is_dataset:
+        # Dataset gate/scorer counts non-heuristic, non-info (D-31); info
+        # measurement findings (contamination_measured/dedup_measured) are shown
+        # separately rather than as gate findings.
+        gate_findings = [f for f in findings if not f.get("heuristic") and f["severity"] != "info"]
+    else:
+        gate_findings = [f for f in findings if not f.get("heuristic") and f["check"] != "V8"]
     by_sev = {s: sum(1 for f in gate_findings if f["severity"] == s) for s in SEVERITIES}
     n_heur = sum(1 for f in findings if f.get("heuristic"))
+    n_info_meas = sum(1 for f in findings if not f.get("heuristic") and f["severity"] == "info")
     lines.append("## Summary")
     lines.append("")
-    lines.append(f"- Findings (V1–V7): **{len(gate_findings)}** "
-                 f"(high {by_sev['high']}, medium {by_sev['medium']}, low {by_sev['low']}, info {by_sev['info']})")
-    lines.append(f"- Heuristic signals (V8, not gate-counted): {n_heur}")
+    lines.append(f"- Findings ({counted_label}): **{len(gate_findings)}** "
+                 f"(high {by_sev['high']}, medium {by_sev['medium']}, low {by_sev['low']})")
+    if is_dataset:
+        lines.append(f"- Measurement findings (info, not gate-counted): {n_info_meas}")
+    lines.append(f"- Heuristic signals ({heur_label}, not gate-counted): {n_heur}")
     packs = header.get("rule_packs", {})
     if packs:
         pv = ", ".join(f"`{k}`={v}" for k, v in sorted(packs.items()))

@@ -1,4 +1,207 @@
-# STATUS — Phase 3 prep done (export built; nothing pushed/posted)
+# STATUS — Extension Phase E3 PREP COMPLETE — publication pending owner confirmation
+
+## Phase E3 — v2 publication update (prep only; nothing pushed/posted)
+
+Built the **v2 public export** in place at `../ReleaseSeal-public` (v1 HEAD
+`4d9dea6`): synced the current dataset + BOM code, tests, fixtures, packs,
+`bench/partbd/`, SPEC/DECISIONS, and the E1/E2 reports; added the Module D + Module
+B README sections; added the HF payload (`dev-d-manifest.json` `cases_sha256
+0e2633a2…`, `partbd-summary.json`) and audit payload (`hf-audit/partbd-results.md`
++ 3 masked sample packs under `packs-d/`); added a static Part B-D panel to the
+Space `index.html`. Report: `reports/phase-e3.md`. Drafts:
+`reports/phase-e3-release-notes.md` (both repos), `reports/phase-e3-entrance-drafts.md`
+(dev only).
+
+- **GATE E2 = PASS** (audited): sealed holdout 120 cases, seed 20261112, recall
+  W1–W7 all 1.000, clean FP 0.000. Carried with its caveat (synthetic + co-designed
+  with the scoring vocabulary → not a real-world recall estimate); Part B-D (W8
+  100%, claim violations ≈ 0, 2 HIT/4 MISS) is the honest real-data statement.
+- **Hygiene scan PASS**: no `holdout_d` path, no `hcase-`, no full holdout
+  `cases_sha256` in the export (the one full occurrence in the synced
+  `reports/phase-e2.md` was truncated to the v1-precedent commitment form
+  `fe09ca18…`); no `claude-code-prompt`/design docs; no email in public text
+  (portfolio-only contact); shipped Part B-D packs re-scanned → 0 unmasked
+  email/IPv4/secret hits. `example.org` synthetic planted-PII in the bench data is
+  intended published test content, not personal data.
+- **Export tests: 183 passed** offline; **CLI smoke** (`dsnapshot`+`verify` on a
+  dataset fixture, `bom import` on a CycloneDX 1.6 fixture) ran offline.
+- **Space step: DONE** (static panel added — the page's model Part B numbers are
+  already a static embedded block, so a static dataset panel was cheap; no runtime
+  fetching, no new tooling).
+- v1 disclosures (model GATE 2 FAIL ×3; V4 screening-signal limitation) kept
+  verbatim. LICENSE byte-unchanged (All Rights Reserved).
+- **Nothing pushed, uploaded, posted, or released.** Publication (GitHub push + v2
+  release, HF dataset upload, Space upload, entrance choice) is **pending the
+  owner's separate final confirmation**, item by item — the checklist is in
+  `reports/phase-e3.md`.
+
+---
+
+# STATUS — Extension Phase E2 COMPLETE — GATE E2 PASS (local only)
+
+## Phase E2 — GATE E2 scoring (final session) — **PASS** (local only)
+
+Scored the sealed holdout **exactly once** with the frozen verifier; no verifier
+change before/during/after. Report: `reports/phase-e2.md`. Decision: **D-45**.
+
+- Tree scored **`90292a4`**; holdout `bench/holdout_d/manifest.json` — 120 cases
+  (W1–W7 × 12 + 36 clean, seed 20261112), `cases_sha256 fe09ca18…` re-verified
+  against the D-09 canonical hasher. Predictions commit `f3b9cba` predates build
+  code (`f077f8e`, `90292a4`).
+- **Result:** per-class recall **W1–W7 all 1.000 (12/12 each)**, clean FP
+  **0.000 (0/36)**; empty miss/FP detail list. GATE E2 bars (recall ≥ 0.85 all,
+  clean FP ≤ 5%) → **PASS**. Verdict computed by applying the E2 bars to the
+  scorer's raw output (the scorer's built-in gate helper carries the E1 0.90 floor
+  — D-45); both agree.
+- **Holdout predictions beaten/met** (predicted 0.85–0.97 recall, 0.02 FP →
+  measured 1.000 / 0.000); conservative, the opposite of the Part B-D optimism.
+  **Caveat:** holdout is synthetic + co-designed with the scoring vocabulary — a
+  perfect synthetic recall is **not** real-world recall; Part B-D (2 HIT/4 MISS,
+  ~0 claim violations) is the honest real-data statement.
+- **GATE E1 regression re-run (repeatable):** dev `cases_sha256 0e2633a2…`
+  unchanged, recall W1–W7 all 1.000, clean FP 0.000 → GATE E1 still PASS; full
+  suite **183 passed** offline; model GATE 1 still PASS.
+- **No re-score, no fabrication, local commit only.** Phase E3 is separate.
+
+## Phase E2 — Module B (AIBOM import/export) — COMPLETE (local only)
+
+Independent of the Part B-D session, the holdout, and GATE E2 (touches none).
+Choices recorded as DECISIONS **D-42..D-44**. SPEC: new **Module B** section
+(B.1–B.6), fixed before implementation. Report: `reports/phase-e2-bom.md`.
+
+- New subpackage `src/releaseseal/bom/`: `facts.py` (import → `bomfacts/1`;
+  CycloneDX 1.5/1.6/1.7 + SPDX 3.0 AI), `verify_bom.py` (→ `bom-result/1`: B1
+  findings + first-class `unverifiable`), `export.py` (pack + optional snapshot →
+  CycloneDX 1.6). CLI `bom import` / `bom export`.
+- **Decidable checks** (`check="B1"`): `bom_hash_mismatch` (high),
+  `bom_license_mismatch` (medium), `bom_dangling_ref` (medium, pure document),
+  `bom_undeclared_artifact` (medium). Each tested +/-. Anything semantic →
+  `unverifiable` (counted), never a finding and never a pass.
+- **Mini-bench** `bench/bom_cases.py`: 24 cases (`bom-manifest/1`,
+  `cases_sha256 312e000e…`), exact-match **24/24 PASS**. Regression suite, **not a
+  gate**; no holdout.
+- Round-trip (export→import recovers the component set), determinism (byte-identical
+  output), and both importers all tested. Existing model + dataset suites green
+  **unmodified** → **full suite 183 green** (141 prior + 42 new), offline, $0.
+- `license-terms-v1` and the model `pack/1` path untouched; no snapshot/W-check
+  code changed. **No push, no HF, no posts — local commit only.**
+
+## Phase E2 build — predictions + W1 file leg + real contamination + Part B-D audit
+
+Build half of Phase E2 (the holdout-authoring, holdout-scoring, and Module B
+AIBOM halves are **other sessions**). Choices recorded as DECISIONS **D-37..D-41**.
+Report: `reports/phase-e2-build.md`. Predictions: `reports/phase-e2-predictions.md`.
+**No publication, no remote writes — local commits only.**
+
+- **Step 0** — predictions preregistered + committed **first** (`f3b9cba`),
+  unchanged since (hard rule 1).
+- **Step 1** — W1 **LICENSE-file leg live**: `dataset-hub-v1` 1.0.0→1.1.0 adds
+  `license_file_phrases` + `license_file_order` (9 ids, pinned normalization &
+  order); `license-terms-v1` **byte-unchanged** (D-29/D-37). New optional
+  `dsnapshot/1` field `license_files`; adapters capture LICENSE text; absent on
+  every bench case → `cases_sha256` unchanged.
+- **Step 2** — `contamination-v1` 1.0.0→1.1.0: real suites `gsm8k-test` (45,164
+  hashes) + `squad-validation` (46,276) as `kind:"ngram-hashes"` — **13-gram
+  sha256 only, never raw text** (D-38). Synthetic suites untouched; byte-identical
+  regen from `fixtures/contamination/` offline.
+- **Step 3** — Part B-D: **36** datasets frozen (`bench/partbd/datasets.json`,
+  committed before the audit), audited live via `DatasetHttpFetcher` (metadata +
+  `dsample/1`-capped sample; $0; 36/36 ok, 0 errors). Outputs in `audit/partbd/`
+  (snapshots redacted of raw sample text; packs masked; `summary.json`
+  `partbd-summary/1`).
+
+### Part B-D predictions scored — 2 HIT / 4 MISS
+
+- **HIT** P3 W4 detector hits 0.194 (≥0.15); **HIT** P6 W8 completeness 1.000 (≥0.50).
+- **MISS** P1 any-counted 0.361 (≥0.60); P2 W1 inconsistency 0.000 (≥0.25);
+  P4 W5 overlap 0.028 (≥0.10); P5 W7 language 0.028 (≥0.10).
+- Honest reading: dataset cards carry almost none of the structured declarations
+  the W-checks grade (W8 100%; claim violations ≈ 0 except one wikipedia W7
+  single-config sampling artifact) → Module D's real-data value is **measurement
+  at stated coverage**, not claim falsification. Content coverage is thin
+  (19/36 text-sampled; 17/36 binary/not row-served). Predictions optimistic in the
+  same direction the model GATE 2 history warned about.
+
+### GATE E2 — **PASS** (scored in the final session; see the top of this file + `reports/phase-e2.md`)
+
+- Regression re-run: Part A-D dev `cases_sha256` `0e2633a2…` unchanged, recall
+  W1–W7 all **1.000**, clean FP **0.000** → GATE E1 still PASS. Model GATE 1 still
+  PASS; generated packs byte-identical; `license-terms-v1` byte-unchanged; model
+  `pack/1` untouched. **Full suite 183 green** (was 141 before Module B's 42),
+  offline.
+
+**$0 spend, local commit only — no push, no HF, no posts.** Holdout authoring,
+holdout scoring (GATE E2 verdict), and Module B AIBOM are deliberately left to
+their own sessions.
+
+---
+
+# (history) Phase E1 COMPLETE (dataset core; GATE E1 PASS; local only)
+
+## Phase E1 — dataset-verification core (complete; nothing pushed/posted)
+
+Built Module D's core per `releaseseal-extension-design.md` §3 and the Phase-E1
+prompt. SPEC fixed first (`SPEC.md` "Extension E1"); choices recorded as
+DECISIONS **D-27..D-36**. Report: `reports/phase-e1.md`.
+
+- **Schema** `dsnapshot/1` + closed-vocabulary declarations (`snapshot/dschema.py`);
+  **sampling** `dsample/1` shared by adapters + bench (`snapshot/dsample.py`);
+  **adapters** `local_dataset` + `hf_dataset` (offline fixtures
+  `fixtures/hf/dataset-*.json`).
+- **Checks W1–W7 + W8 signal** (`verify/wchecks.py`, `verify/lid.py`); PII values
+  masked everywhere (D-31). Core `verify()` dispatches on `schema_version`.
+- **Packs**: `dataset-hub-v1` (W8) hand-authored; `contamination-v1` + `lid-v1`
+  generated by the checked-in `rules/build_packs.py`, byte-identical on regen.
+  `license-terms-v1` reused unchanged.
+- **Evidence** `pack/2` for datasets (snapshot_kind); model `pack/1`
+  **byte-for-byte unchanged** (D-35). `verify-pack` verifies both.
+- **Bench Part A-D**: `bench/generate_d.py` + `bench/score_d.py`
+  (`bench-manifest-d/1`); CLI `dsnapshot` + `bench-d generate|score`.
+
+### GATE E1 — **PASS**
+
+- Dev split 120 cases, seed **20261111**, `cases_sha256` `0e2633a2…`.
+- Per-class recall **W1–W7 all 1.000** (12/12 each); **clean FP 0.000 (0/36)**;
+  full suite **129 tests green** (72 existing unmodified + 57 new), offline.
+- Co-designed-synthetic caveat stands (as GATE 1): independent sealed holdout +
+  Part B-D are **Phase E2**, not authored here.
+- Model side intact: frozen dev `cases_sha256` `5267e1a0…` unchanged; model
+  GATE 1 still PASS; model `pack/1` byte-for-byte.
+
+### Deviations (conservative reading, prompt §10)
+
+- D-29 W1 LICENSE-file leg inert (license-terms-v1 kept unchanged) — W1 uses
+  declared-vs-croissant + declared-in-table.
+- D-30 W3 size leg inert (no declared size surface in the closed vocabulary).
+- D-31 scorer counts non-heuristic, non-info only (W8 / measurement info excluded).
+- D-36 near-miss clean `pii:"present"` uses detector-negative content; honest
+  disclosure semantics proven in a unit test.
+
+**$0 spend, offline, local commit only — no push, no HF, no posts.** Phase E2
+(holdout, Part B-D, Module B AIBOM) is deliberately not started.
+
+---
+
+# (history) Phase 3 PUBLISHED (live; GATE 2 FAIL disclosed)
+
+## Publication complete (2026-11-08)
+
+Published with owner-confirmed text; verifier frozen; no holdout data published.
+- Code: <https://github.com/NagaYu/releaseseal> (Public, noreply author, LICENSE).
+- Bench dataset: <https://huggingface.co/datasets/NagaYu/releaseseal-bench>
+  (dev + dev_ext manifests, `audit/` with Part B v3 results + 3 evidence packs).
+- Demo: <https://huggingface.co/spaces/NagaYu/releaseseal-demo> (Static Space,
+  RUNNING; Part B table + working evidence-pack viewer).
+- Entrance B done (dataset card links the live Space); Entrance A (community post)
+  not done this run. Step-4 incident (approved card lacked the Space URL) was
+  stopped-and-reported, then resolved with owner authorisation. Detail in
+  `reports/phase3-publish.md`.
+- Disclosed on the public artifacts: full gate history (GATE 1 PASS; GATE 2 FAIL
+  ×3) and the V4 screening-signal limitation (final clean FP 82%).
+
+---
+
+# (history) Phase 3 prep done (export built; nothing pushed/posted)
 
 ## Phase 3 — publication prep (prep only)
 

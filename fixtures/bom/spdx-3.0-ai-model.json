@@ -1,0 +1,37 @@
+{
+  "@context": "https://spdx.org/rdf/3.0.0/spdx-context.jsonld",
+  "@graph": [
+    {
+      "spdxId": "spdx:pkg-widget",
+      "type": "software_Package",
+      "name": "acme/widget-lm",
+      "versionInfo": "r1",
+      "hasDeclaredLicense": "apache-2.0",
+      "typeOfModel": "transformer",
+      "hasDownloadLocation": "https://hf.co/acme/widget-lm",
+      "verifiedUsing": [
+        {
+          "type": "Hash",
+          "algorithm": "sha256",
+          "hashValue": "92fd8db60f8d544c2519c0c5506c5a23ae4d2932da6508f03e9e295ac26f6d2d"
+        }
+      ]
+    },
+    {
+      "spdxId": "spdx:pkg-corpus",
+      "type": "software_Package",
+      "name": "acme/corpus",
+      "versionInfo": "v2",
+      "hasDeclaredLicense": "cc-by-4.0",
+      "datasetType": "text"
+    },
+    {
+      "type": "Relationship",
+      "relationshipType": "dependsOn",
+      "from": "spdx:pkg-widget",
+      "to": [
+        "spdx:pkg-corpus"
+      ]
+    }
+  ]
+}

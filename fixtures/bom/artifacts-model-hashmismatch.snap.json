@@ -1,0 +1,27 @@
+{
+  "schema_version": "snapshot/1",
+  "captured_at": "2026-11-11",
+  "source": {
+    "adapter": "local",
+    "repo_id": "acme/tiny",
+    "revision": "r3",
+    "path": null
+  },
+  "files": [
+    {
+      "path": "weights.bin",
+      "size": 11,
+      "sha256": "5fcef608cb6465e095314c67986e6b00b33f005b5825ac14ba9b52c2edd24279",
+      "hash_source": "streamed"
+    }
+  ],
+  "card": {
+    "yaml": {
+      "license": "mit"
+    },
+    "prose": "",
+    "claims": {
+      "license": "mit"
+    }
+  }
+}

@@ -7,7 +7,7 @@ import os
 import sys
 from typing import Optional
 
-from . import APP_CODENAME, __version__
+from . import APP_CODENAME, DSAMPLE_CAP_BYTES, DSAMPLE_CAP_ROWS, __version__
 
 
 def _write_json(obj, path: Optional[str]):
@@ -37,6 +37,27 @@ def cmd_snapshot(args) -> int:
         snap = build_snapshot(args.hf, args.revision, HttpFetcher())
     else:
         print("error: one of --local / --hf / --hf-fixture is required", file=sys.stderr)
+        return 2
+    _write_json(snap, args.output)
+    return 0
+
+
+def cmd_dsnapshot(args) -> int:
+    if args.local:
+        from .snapshot.local_dataset import snapshot_from_dir
+        snap = snapshot_from_dir(args.local, cap_rows=args.sample_cap_rows,
+                                 cap_bytes=args.sample_cap_bytes)
+    elif args.hf_dataset_fixture:
+        from .snapshot.hf_dataset import snapshot_from_dataset_fixture
+        snap = snapshot_from_dataset_fixture(args.hf_dataset_fixture,
+                                             args.hf_dataset or "unknown/dataset", args.revision)
+    elif args.hf_dataset:
+        print("error: live --hf-dataset fetch is Phase E2; pass --hf-dataset-fixture "
+              "<bundle.json> for an offline recorded bundle.", file=sys.stderr)
+        return 2
+    else:
+        print("error: one of --local / --hf-dataset (+ --hf-dataset-fixture) is required",
+              file=sys.stderr)
         return 2
     _write_json(snap, args.output)
     return 0
@@ -116,6 +137,64 @@ def cmd_bench_score(args) -> int:
     return 0 if gate["pass"] else 1
 
 
+def cmd_bench_d_generate(args) -> int:
+    from .bench import generate_d
+    os.makedirs(args.output, exist_ok=True)
+    manifest = generate_d(seed=args.seed)
+    with open(os.path.join(args.output, "manifest.json"), "w", encoding="utf-8") as fh:
+        json.dump(manifest, fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
+    print(f"generated {len(manifest['cases'])} dataset cases (seed={manifest['seed']}, "
+          f"cases_sha256={manifest['cases_sha256'][:16]}...) -> {args.output}/manifest.json")
+    return 0
+
+
+def cmd_bench_d_score(args) -> int:
+    from .bench import gate_e1, score_d
+    manifest = _load_json(args.manifest)
+    scored = score_d(manifest)
+    gate = gate_e1(scored)
+    print(f"{APP_CODENAME} bench-d score")
+    print(f"  cases: {len(manifest.get('cases', []))}  seed: {manifest.get('seed')}")
+    print("  per-class recall:")
+    for c, r in scored["recall"].items():
+        rr = "n/a" if r is None else f"{r:.3f}"
+        print(f"    {c}: {rr}  ({scored['per_class_hit'][c]}/{scored['per_class_total'][c]})")
+    print(f"  clean FP rate: {scored['clean_fp_rate']:.3f}  ({scored['clean_fp']}/{scored['clean_total']})")
+    print(f"  GATE E1 (recall>= {gate['recall_floor']}, FP<= {gate['fp_ceiling']}): "
+          f"{'PASS' if gate['pass'] else 'FAIL'}")
+    if args.json:
+        _write_json({"score": scored, "gate_e1": gate}, args.json)
+    return 0 if gate["pass"] else 1
+
+
+def cmd_bom_import(args) -> int:
+    from .bom import import_bom, verify_bom, artifacts_from_snapshot
+    document = _load_json(args.bom)
+    try:
+        facts = import_bom(document)
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    artifacts = None
+    if args.artifacts:
+        artifacts = artifacts_from_snapshot(_load_json(args.artifacts))
+    result = verify_bom(facts, artifacts)
+    _write_json(result, args.output)
+    if args.ci and result["findings"]:
+        return 1
+    return 0
+
+
+def cmd_bom_export(args) -> int:
+    from .bom import export_bom
+    pack = _load_json(args.pack)
+    snapshot = _load_json(args.snapshot) if args.snapshot else None
+    doc = export_bom(pack, snapshot)
+    _write_json(doc, args.output)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog=__package__ or "releaseseal",
                                 description=f"{APP_CODENAME} — offline model-release evidence verifier.")
@@ -130,7 +209,18 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("-o", "--output")
     s.set_defaults(func=cmd_snapshot)
 
-    v = sub.add_parser("verify", help="run V1-V8 over a snapshot")
+    ds = sub.add_parser("dsnapshot", help="build a dataset snapshot (dsnapshot/1)")
+    ds.add_argument("--local", help="local dataset directory")
+    ds.add_argument("--hf-dataset", dest="hf_dataset", help="HF dataset repo id")
+    ds.add_argument("--hf-dataset-fixture", dest="hf_dataset_fixture",
+                    help="recorded HF dataset API bundle JSON (no network)")
+    ds.add_argument("--revision", default=None)
+    ds.add_argument("--sample-cap-rows", dest="sample_cap_rows", type=int, default=DSAMPLE_CAP_ROWS)
+    ds.add_argument("--sample-cap-bytes", dest="sample_cap_bytes", type=int, default=DSAMPLE_CAP_BYTES)
+    ds.add_argument("-o", "--output")
+    ds.set_defaults(func=cmd_dsnapshot)
+
+    v = sub.add_parser("verify", help="run V1-V8 / W1-W8 over a snapshot")
     v.add_argument("snapshot")
     v.add_argument("-o", "--output")
     v.add_argument("--as-of", dest="as_of", default=None)
@@ -162,6 +252,31 @@ def build_parser() -> argparse.ArgumentParser:
     bs.add_argument("--manifest", required=True)
     bs.add_argument("--json", help="write full score JSON here")
     bs.set_defaults(func=cmd_bench_score)
+
+    bd = sub.add_parser("bench-d", help="synthetic dataset bench (Part A-D)")
+    bdsub = bd.add_subparsers(dest="bench_d_cmd", required=True)
+    bdg = bdsub.add_parser("generate", help="generate the dataset dev split")
+    bdg.add_argument("--seed", type=int, default=20261111)
+    bdg.add_argument("-o", "--output", default="out/bench-d")
+    bdg.set_defaults(func=cmd_bench_d_generate)
+    bds = bdsub.add_parser("score", help="score a dataset manifest")
+    bds.add_argument("--manifest", required=True)
+    bds.add_argument("--json", help="write full score JSON here")
+    bds.set_defaults(func=cmd_bench_d_score)
+
+    bom = sub.add_parser("bom", help="AIBOM import/export (Module B)")
+    bomsub = bom.add_subparsers(dest="bom_cmd", required=True)
+    bi = bomsub.add_parser("import", help="import a BOM document and verify (bom-result/1)")
+    bi.add_argument("bom", help="CycloneDX ML-BOM or SPDX 3.0 AI JSON document")
+    bi.add_argument("--artifacts", help="paired model/dataset snapshot JSON for verification")
+    bi.add_argument("-o", "--output")
+    bi.add_argument("--ci", action="store_true", help="exit 1 if any B1 finding")
+    bi.set_defaults(func=cmd_bom_import)
+    be = bomsub.add_parser("export", help="export a CycloneDX 1.6 ML-BOM from an evidence pack")
+    be.add_argument("pack", help="evidence pack (pack/1 or pack/2)")
+    be.add_argument("--snapshot", help="snapshot JSON for file components + declared license")
+    be.add_argument("-o", "--output")
+    be.set_defaults(func=cmd_bom_export)
 
     return p
 

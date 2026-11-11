@@ -165,3 +165,113 @@ contact route is the portfolio: <https://nagayu-portfolio.nagayu.workers.dev/en>
 Sealed holdout content is never published; this repository ships the code, the
 synthetic dev/dev_ext bench, the rule packs, the real-model audit reports, and the
 full gate history.
+
+## 9. Dataset releases (Module D)
+
+The same claims-vs-artifacts engine, widened to **dataset releases** (a Hugging
+Face dataset repo at a pinned revision, or a local dataset directory). W1–W7 are
+deterministic checks; W8 is a signal. **Every W-check binds only to structured
+declarations** (card YAML fields, Croissant metadata, LICENSE files, structured
+tags) — never to prose, which is where the model side's V4 over-fired. Where a
+claim exists only in prose, the module measures the underlying fact and reports it
+as an audit fact, never as a claim violation.
+
+- **W1 license consistency** — declared license vs Croissant vs LICENSE file vs the
+  versioned license-terms table; an out-of-table license is reported
+  *undeterminable*, never guessed.
+- **W2 source-license rollup** · **W3 inventory truth** (files/splits/row counts) ·
+  **W4 PII** (high-precision detectors; values masked; falsification/measurement
+  only, never certifies absence) · **W5 benchmark contamination** (pinned n-gram
+  overlap vs versioned suites) · **W6 dedup** (MinHash at pinned parameters) ·
+  **W7 composition drift** (pinned language-ID over the sample vs declared shares).
+- **W8 dataset-card completeness** — a heuristic signal only, excluded from gates
+  and headlines (the V4 lesson).
+
+Content checks run on a **pinned deterministic sample** (`dsample/1`), and every
+content finding cites its coverage — the pack never implies full-corpus
+certification.
+
+### Gate results (dataset side)
+
+| gate | set | result | bars |
+|---|---|---|---|
+| GATE E1 | dev synthetic (120, seed 20261111) | **PASS** | recall ≥0.90 all W1–W7, clean FP ≤5% |
+| GATE E2 | sealed holdout (120, seed 20261112) | **PASS** | recall ≥0.85 all W1–W7, clean FP ≤5% |
+
+GATE E2 measured per-class recall **1.000** for all of W1–W7 and clean FP **0.000**,
+beating every preregistered prediction (0.85–0.97). **Read with its caveat:** the
+holdout is *synthetic and co-designed* with the same W-check vocabulary that scores
+it — a perfect synthetic recall is **not** a real-world recall estimate. The honest
+real-data statement is the Part B-D audit below. (Holdout cases are never published;
+only aggregates. See `reports/phase-e1.md`, `phase-e2.md`.)
+
+### Headline — Part B-D real dataset audit (36 datasets)
+
+A live, pinned-revision audit of **36** popular public HF datasets (metadata +
+`dsample/1`-capped sample; **36/36 ran, 0 errors, $0**; no weight downloads). Full
+results, per-dataset and with no cherry-picking, are in `hf-audit/partbd-results.md`
+and `hf-dataset/partbd-summary.json`.
+
+The real-data result is a **measurement** result, not a falsification result:
+real dataset cards carry almost none of the machine-readable declarations the
+W-checks grade, so there is almost nothing to violate.
+
+- **W8 completeness gaps: 100%** — every one of the 36 cards is missing ≥1
+  declaration field (the headline figure; W8 is signal-only).
+- **Claim violations ≈ 0.** `license_inconsistent` 0/36; `license_unknown`
+  (undeterminable) 10/36; the only `declared_language_absent` findings (321) are all
+  from one dataset (`wikimedia/wikipedia`) and trace to **single-config sampling** —
+  a coverage limitation of the audit, **not** a falsification, and not counted as a
+  violation.
+- **W4 PII detectors** — format hits only, all values masked (email 29, card_luhn 9,
+  ipv4 2) across 7 web-crawl corpora; the 9 `card_luhn` hits are
+  Luhn-valid-by-chance strings, **not** confirmed card numbers.
+- **Coverage:** 19/36 datasets yielded a content sample; 17/36 are binary / not
+  row-served. **13/36** had ≥1 counted finding.
+- **Preregistered predictions: 2 HIT / 4 MISS** (disclosed) — optimistic in the same
+  direction the model-side GATE 2 history warned about.
+
+### How to run (dataset side)
+
+```bash
+export PYTHONPATH=src
+# build a dataset snapshot (local dir, or a recorded HF dataset bundle — no network)
+python3 -m releaseseal dsnapshot --local ./some-dataset -o dsnap.json
+python3 -m releaseseal dsnapshot --hf-dataset org/name \
+  --hf-dataset-fixture fixtures/hf/dataset-tiny-clean.json -o dsnap.json
+python3 -m releaseseal verify dsnap.json -o findings.json      # dispatches on schema
+python3 -m releaseseal pack   dsnap.json -o pack.json --report report.md
+
+# synthetic dataset bench (Part A-D)
+python3 -m releaseseal bench-d generate --seed 20261111 -o out/bench_d
+python3 -m releaseseal bench-d score --manifest out/bench_d/manifest.json
+```
+
+## 10. AIBOM import/export (Module B)
+
+CycloneDX ML-BOM and SPDX 3.0 AI documents are first-class inputs and outputs, so a
+BOM arriving inside an enterprise release bundle can be graded by the same engine.
+
+- **Import:** CycloneDX **1.5 / 1.6 / 1.7** and **SPDX 3.0 AI** (JSON-LD) →
+  components, licenses, hashes, dependency edges (hashes normalized across formats).
+- **Four decidable checks** (`check="B1"`), each tested positive and negative:
+  `bom_hash_mismatch` (high), `bom_license_mismatch` (medium), `bom_dangling_ref`
+  (medium, pure document), `bom_undeclared_artifact` (medium).
+- **`unverifiable` is a first-class, counted outcome** — a BOM whose described
+  artifacts are not in hand is *measured as unverifiable* (with a reason), never
+  silently passed and never a finding. No semantic judgement is ever made.
+- **Export:** emit a CycloneDX 1.6 ML-BOM from any evidence pack (model or dataset);
+  export → import round-trips the component set; output is byte-deterministic.
+- **Mini-bench:** 24 planted-defect cases, exact-match **24/24** — a regression
+  check, **not** a gate (no holdout; the decidable class set is small and fully
+  decidable).
+
+```bash
+export PYTHONPATH=src
+python3 -m releaseseal bom import fixtures/bom/cyclonedx-1.6-model.json \
+  --artifacts fixtures/bom/artifacts-model-clean.snap.json -o bom-result.json
+python3 -m releaseseal bom export pack.json --snapshot snap.json -o mlbom.json
+```
+
+Full test suite (model + dataset + BOM): **183 passed**, offline. See
+`reports/phase-e2-bom.md`.
