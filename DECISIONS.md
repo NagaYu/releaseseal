@@ -723,3 +723,76 @@ applied in the report. The measured recall (1.000 on every class) clears both th
 so the hand-applied E2 verdict and the CLI's E1-labelled line agree. Recorded for
 provenance: the verdict is PASS against the **E2** bars, not merely against the
 scorer's built-in E1 line.
+
+### D-46 — one SHA-256 alg canonicalization for both importers at verify (completes D-44)
+
+**Context.** D-44 normalizes SPDX algorithm labels to the CycloneDX spelling *on
+import* (`_norm_alg`: strip, case-fold, drop `-`/`_`), so SPDX facts carry keys
+like `SHA-256`. The CycloneDX importer (`_cdx_hashes`), however, keys hashes by the
+raw `alg` string, and `verify_bom`'s comparator tested only
+`alg.upper().replace("-","") == "SHA256"` — tolerating case and the hyphen but not
+surrounding whitespace or an underscore. A CycloneDX label `" SHA-256"`,
+`"SHA-256 "` or `"SHA_256"` therefore never compared, and a genuine
+`bom_hash_mismatch` (high) was silently downgraded to `unverifiable`, while the
+SPDX path with the same label fired (the fuzz audit's F-1).
+
+**Decision.** The verify-side comparator canonicalizes the label through the single
+shared `_norm_alg` rule (`verify_bom` imports it from `facts`): a hash compares
+against the artifact's `sha256` iff `_norm_alg(alg) == "SHA-256"`. This makes the
+same label yield the same verdict in CycloneDX and SPDX — a differing value fires
+`bom_hash_mismatch`, an equal value is compared-clean (not `unverifiable`) — while a
+label that canonicalizes to no known algorithm stays `unverifiable` (no invented
+finding for a genuinely unknown alg). The fix is at verify, so the facts shape and
+BOM export round-trip are unchanged; the finding message still reports the raw
+label as written. This completes D-44's cross-format intent; it does not change it.
+
+### D-47 — CLI file-load error contract: `error:` + exit 2, never a traceback
+
+**Context.** Every `_load_json` subcommand (`verify`, `pack`, `verify-pack`,
+`bench*/score`, `bom import/export`, …) loaded its input with a bare `json.load`.
+`cmd_bom_import` wrapped only `import_bom(document)` in `try/except ValueError`, so
+the file was decoded *outside* the guard: a malformed, truncated, empty, non-JSON,
+trailing-garbage, wrong-encoding or missing file raised an uncaught
+`JSONDecodeError`/`OSError` and the CLI exited with a raw traceback instead of the
+designed `error:` + exit 2 (the fuzz audit's F-2). `import_bom` on an already-parsed
+object is correctly hardened; only the file-load edge leaked.
+
+**Decision.** `_load_json` catches `json.JSONDecodeError`, `UnicodeDecodeError` and
+`OSError` and re-raises a new `CliError` carrying a user-facing message; `main`
+renders any `CliError` as `error: <msg>` on stderr with exit 2. `CliError` is a
+plain `Exception` (not a `ValueError`), so a subcommand's own `except ValueError`
+(e.g. the `import_bom` format check) never swallows a file-load failure, and the
+contract holds uniformly for every subcommand fed by `_load_json`. The input
+encoding stays `utf-8`, so a UTF-8-BOM / UTF-16 file is reported as an error rather
+than silently accepted.
+
+### D-48 — cardparse subset extension + the never-silent rule
+
+**Context.** The stdlib minimal YAML parser (`cardparse`, used only by the `local`
+dataset/model adapters; `hf` receives pre-parsed `cardData`) silently dropped or
+corrupted declaration fields on valid YAML the W-checks' claim surface (§E1.1.1)
+depends on (the fuzz audit's F-3/F-4/F-5): a flow list-of-maps
+`sources: [{name: …, license: …}]` extracted to `[]`; an anchored scalar
+`license: &a apache-2.0` kept the raw token; an anchored number and a `<<` merge key
+dropped; an inline `# comment` and double-quoted escapes corrupted the scalar. Each
+was a silent *per-field* loss, not the documented whole-document `{}`-fallback, so
+nothing downstream could tell a declaration had been lost.
+
+**Decision.** The subset is extended to parse these constructs as a conformant YAML
+parser does: (1) **flow lists-of-maps** `[{k: v}, …]` parse recursively as maps,
+with nested flow values and scalar types preserved (`rows` stays an int), so flow
+and block encodings of the same card extract identically; (2) **anchors / aliases /
+merge keys** resolve through a per-parse anchor registry — an anchored scalar
+extracts as its value, an anchored number keeps its numeric type, an alias `*a`
+resolves to the anchored value, and `<<: *base` merges the anchored map with
+explicitly written keys winning; (3) **inline `#` comments** are stripped only when
+the `#` starts the value or is preceded by whitespace and sits outside a quoted
+scalar (a glued `a#b` stays content), and **double-quoted escapes** (`\n`, `\t`,
+`\"`, `\\`, `\xNN`, `\uNNNN`, …) and the single-quoted `''`→`'` escape are
+processed. **The never-silent rule:** no declaration-bearing construct may be
+silently dropped or corrupted per field while the rest of the card parses; a
+construct the subset still cannot represent must take the documented whole-document
+`{}` + note fallback (or surface downstream as `unverifiable`), never a partial
+per-field loss. The `hf` path and the bench generators do not use `cardparse`, so no
+gate number moves; the extension only lets correctly-declared violations that were
+always in the card reach the W-checks.

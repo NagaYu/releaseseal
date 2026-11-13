@@ -19,9 +19,32 @@ def _write_json(obj, path: Optional[str]):
         sys.stdout.write(text + "\n")
 
 
+class CliError(Exception):
+    """A user-facing CLI error, rendered as ``error: <msg>`` with exit 2.
+
+    Distinct from ``ValueError`` so a subcommand's own ``except ValueError``
+    guard (e.g. the ``import_bom`` format check) never swallows a file-load
+    failure; ``main`` renders it uniformly for every subcommand (F-2).
+    """
+
+
 def _load_json(path: str):
-    with open(path, "r", encoding="utf-8") as fh:
-        return json.load(fh)
+    """Load a JSON input file, mapping any unreadable/undecodable file to a
+    ``CliError`` (``error:`` + exit 2 at ``main``) instead of a traceback (F-2).
+
+    Covers the designed file-load contract for every ``_load_json`` subcommand:
+    malformed, truncated, empty, non-JSON, trailing garbage, wrong encoding, and
+    missing files all surface as ``error:``.
+    """
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            return json.load(fh)
+    except json.JSONDecodeError as exc:
+        raise CliError(f"{path}: not valid JSON ({exc})") from exc
+    except UnicodeDecodeError as exc:
+        raise CliError(f"{path}: not valid UTF-8 ({exc})") from exc
+    except OSError as exc:
+        raise CliError(f"{path}: cannot read file ({exc.strerror or exc})") from exc
 
 
 def cmd_snapshot(args) -> int:
@@ -283,7 +306,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
-    return args.func(args)
+    try:
+        return args.func(args)
+    except CliError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

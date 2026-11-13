@@ -10,6 +10,7 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from ..verify.findings import finding, make_evidence
+from .facts import _norm_alg
 
 BOM_RESULT_SCHEMA = "bom-result/1"
 
@@ -104,8 +105,14 @@ def verify_bom(facts: dict, artifacts: Optional[dict] = None) -> dict:
                 compared = False
                 for alg, value in sorted(hashes.items()):
                     # Compare only when the artifact carries the same alg. The
-                    # artifact set models SHA-256 (snapshots record sha256).
-                    if alg.upper().replace("-", "") == "SHA256" and isinstance(art_sha, str):
+                    # artifact set models SHA-256 (snapshots record sha256). The
+                    # alg label is canonicalized through the single shared
+                    # `_norm_alg` rule (D-44, F-1) so a CycloneDX label carrying
+                    # incidental whitespace or an underscore (" SHA-256",
+                    # "SHA-256 ", "SHA_256") decides identically to the SPDX path,
+                    # which already stores normalized keys. A label that
+                    # canonicalizes to no known algorithm stays unverifiable.
+                    if _norm_alg(alg) == "SHA-256" and isinstance(art_sha, str):
                         compared = True
                         if value.lower() != art_sha.lower():
                             findings.append(finding(
